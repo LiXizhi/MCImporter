@@ -18,6 +18,7 @@
  */
 
 #include "mc/cache.h"
+#include <math.h>
 
 namespace mapcrafter {
 namespace mc {
@@ -113,6 +114,33 @@ const CacheStats& WorldCache::getRegionCacheStats() const {
 
 const CacheStats& WorldCache::getChunkCacheStats() const {
 	return chunkstats;
+}
+
+//BlockPos LocalBlockPos::toGlobalPos(const ChunkPos& chunk) const {
+//	return BlockPos(x + chunk.x * 16, z + chunk.z * 16, y);
+//}
+
+bool WorldCache::hasBlock(BlockPos blockpos, uint16_t block_id, uint8_t data, uint8_t state)
+{
+	ChunkPos chunkpos(blockpos);
+	RegionPos &regionpos = chunkpos.getRegion();
+	if (world.hasRegion(regionpos))
+	{
+		RegionFile* region = getRegion(regionpos);
+		if (region)
+		{
+			if (region->hasChunk(chunkpos))
+			{
+				Chunk* chunk = getChunk(chunkpos);
+				if (chunk)
+				{
+					if (chunk->hasBlock(blockpos.toLocalPos(), block_id, data, state))
+						return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 }

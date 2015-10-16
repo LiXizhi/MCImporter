@@ -96,6 +96,8 @@ public:
 	BlockPos operator-(const BlockPos& p2) const;
 
 	bool operator<(const BlockPos& other) const;
+
+	LocalBlockPos BlockPos::toLocalPos() const;
 };
 
 extern const mc::BlockPos DIR_NORTH, DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_TOP, DIR_BOTTOM;
@@ -114,6 +116,8 @@ public:
 	BlockPos toGlobalPos(const ChunkPos& chunk) const;
 
 	bool operator<(const LocalBlockPos& other) const;
+
+	bool beBorder() const;
 };
 
 std::ostream& operator<<(std::ostream& stream, const RegionPos& region);

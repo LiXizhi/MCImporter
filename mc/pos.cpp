@@ -191,6 +191,15 @@ bool BlockPos::operator<(const BlockPos& other) const {
 	return y < other.y;
 }
 
+LocalBlockPos BlockPos::toLocalPos() const {
+
+	int local_x = x % 16;
+	local_x = local_x < 0 ? local_x + 16 : local_x;
+	int local_z = z % 16;
+	local_z = local_z < 0 ? local_z + 16 : local_z;
+	return LocalBlockPos(local_x, local_z, y);
+}
+
 extern const mc::BlockPos DIR_NORTH(0, -1, 0);
 extern const mc::BlockPos DIR_SOUTH(0, 1, 0);
 extern const mc::BlockPos DIR_EAST(1, 0, 0);
@@ -233,6 +242,13 @@ bool LocalBlockPos::operator<(const LocalBlockPos& other) const {
 		return x > other.x;
 	}
 	return y < other.y;
+}
+
+bool LocalBlockPos::beBorder() const
+{
+	if (x == 15 || z == 15)
+		return true;
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& stream, const RegionPos& region) {

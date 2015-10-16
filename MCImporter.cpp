@@ -174,6 +174,7 @@ bool MCImporter::LoadWorld( const std::string& sFolderName )
 	if(m_world.load(sFolderName))
 	{
 		m_world_cache = std::unique_ptr<mc::WorldCache>(new mc::WorldCache(m_world));
+		//p_world_cache = new mc::WorldCache(m_world);
 		return true;
 	}
 	return false;
@@ -219,6 +220,125 @@ bool MCImporter::isOccludedBlock( const mc::BlockPos& pos, mc::Chunk* chunk, uin
 	return true;
 }
 
+/*
+53(oak_stairs),67(stone_stairs),108(brick_stairs),109(stone_brick_stairs),114(nether_brick_stairs),128(sandstone_stairs),134(spruce_stairs),135(birch_stairs),
+136(jungle_stairs),156(quartz_stairs),163(acacia_stairs),164(dark_oak_stairs),180(red_sandstone_stairs)
+*/
+template<typename pObjectType,typename PosType>
+uint8_t getStairsBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_t data)
+{
+	uint8_t state = 0;
+	//uint8_t data = getBlockData(pos);
+	// facing "x-"
+	if (data == 0)
+	{
+
+		if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 2))        // state:outter 
+		{
+			state = 0;
+		}
+		else if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 3))   // state:outter 
+		{
+			state = 1;
+		}
+		else if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 2))   // state:inner 
+		{
+			state = 2;
+		}
+		else if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 3))   // state:inner
+		{
+			state = 3;
+		}
+		else
+			state = 7;
+
+	}
+
+	// facing "x+"
+	if (data == 1)
+	{
+		if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 2))   // state:outter 
+		{
+			state = 0;
+		}
+		else if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 3))   // state:outter
+		{
+			state = 1;
+		}
+		else if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 2))        // state:inner 
+		{
+			state = 2;
+		}
+		else if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 3))   // state:inner 
+		{
+			state = 3;
+		}
+		else
+			state = 7;
+	}
+
+	// facing "z-"
+	if (data == 2)
+	{
+		if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 0))        // state:outter 
+		{
+			state = 0;
+		}
+		else if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 1))   // state:outter 
+		{
+			state = 1;
+		}
+		else if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 0))   // state:inner 
+		{
+			state = 2;
+		}
+		else if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 1))   // state:inner
+		{
+			state = 3;
+		}
+		else
+			state = 7;
+
+	}
+
+	// facing "z+"
+	if (data == 3)
+	{
+		if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 0))   // state:outter 
+		{
+			state = 0;
+		}
+		else if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 1))   // state:outter
+		{
+			state = 1;
+		}
+		else if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 0))        // state:inner 
+		{
+			state = 2;
+		}
+		else if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 1))   // state:inner 
+		{
+			state = 3;
+		}
+		else
+			state = 7;
+	}
+	return state;
+}
+
+template<typename pObjectType, typename PosType>
+uint8_t getBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_t data)
+{
+	uint8_t state = 0;
+	//uint16_t block_id = getBlockID(pos);
+	if (block_id == 53)
+	{
+		state = getStairsBlockState(pobj, pos, block_id, data);
+	}
+	return state;
+}
+
+
 bool LoadMCWorld(const std::string& sFolderName)
 {
 	MCImporter& mc_importer = MCImporter::CreateGetSingleton();
@@ -227,6 +347,7 @@ bool LoadMCWorld(const std::string& sFolderName)
 		if (mc_importer.m_world.load(sFolderName))
 		{
 			mc_importer.m_world_cache = std::unique_ptr<mc::WorldCache>(new mc::WorldCache(mc_importer.m_world));
+			//mc_importer.p_world_cache = new mc::WorldCache(mc_importer.m_world);
 			return true;
 		}
 		return false;
@@ -268,21 +389,28 @@ bool GetRegionBlocks(int x, int z, std::vector<int> *blocks)
 					{
 						mc::LocalBlockPos pos(x, z, y);
 						uint16_t block_id = mychunk->getBlockID(pos);
-						uint16_t block_data = mychunk->getBlockData(pos);
 						if (block_id != 0)
+						//if (block_id == 63)
 						{
+							uint16_t block_data = mychunk->getBlockData(pos);
 							BlockPos gpos = pos.toGlobalPos(chuck_pos);
+							uint16_t block_state = 0;
+							if (pos.beBorder())
+								block_state = getBlockState(mc_importer.m_world_cache, gpos, block_id, block_data);
+							else
+								block_state = getBlockState(mychunk, pos, block_id, block_data);
 							blocks->push_back(gpos.x);
 							blocks->push_back(gpos.y);
 							blocks->push_back(gpos.z);
-							
-							if (MCBlock::TranslateMCBlock(block_id, block_data))
+							uint16_t block_side = 0;
+							if (!MCBlock::TranslateMCBlock(block_id, block_data,block_state,block_side))
 							{
 								char sMsg[130];
-								snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d translate failed!;", x, z, gpos.x,gpos.y,gpos.z,block_id);
+								snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x,gpos.y,gpos.z,block_id,block_data,block_state);
 							}
 							blocks->push_back((int)block_id);
 							blocks->push_back((int)block_data);
+							blocks->push_back((int)block_side);
 						}
 					}
 				}

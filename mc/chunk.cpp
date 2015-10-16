@@ -195,6 +195,142 @@ uint8_t Chunk::getBiomeAt(const LocalBlockPos& pos) const {
 	return biomes[z * 16 + x];
 }
 
+bool Chunk::hasBlock(const LocalBlockPos& pos, const uint16_t block_id, const uint8_t data, const uint8_t state) const
+{
+	bool hasBlock = true;
+	uint16_t real_block_id = getBlockID(pos);
+	if (real_block_id != block_id)
+		hasBlock = false;
+	if (data != 255)
+	{
+		uint16_t real_data = getBlockData(pos);
+		if (real_data != data)
+			hasBlock = false;
+	}
+	/*if (state != 255)
+	{
+		uint16_t real_state = getBlockState(pos);
+		if (real_state != state)
+			hasBlock = false;
+	}*/
+	return hasBlock;
+}
+//
+///*
+//53(oak_stairs),67(stone_stairs),108(brick_stairs),109(stone_brick_stairs),114(nether_brick_stairs),128(sandstone_stairs),134(spruce_stairs),135(birch_stairs),
+//136(jungle_stairs),156(quartz_stairs),163(acacia_stairs),164(dark_oak_stairs),180(red_sandstone_stairs)
+//*/
+//uint8_t Chunk::getStairsBlockState(const LocalBlockPos& pos, uint16_t block_id) const
+//{
+//	uint8_t state = 0;
+//	uint8_t data = getBlockData(pos);
+//	// facing "x-"
+//	if (data == 0)
+//	{
+//		
+//		if (hasBlock(LocalBlockPos(pos.x + 1, pos.z, pos.y), block_id, 2))        // state:outter 
+//		{
+//			state = 0;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x + 1, pos.z, pos.y), block_id, 3))   // state:outter 
+//		{
+//			state = 1;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x - 1, pos.z, pos.y), block_id, 2))   // state:inner 
+//		{
+//			state = 2;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x - 1, pos.z, pos.y), block_id, 3))   // state:inner
+//		{
+//			state = 3;
+//		}
+//		else
+//			state = 7;
+//		
+//	}
+//
+//	// facing "x+"
+//	if (data == 1)
+//	{
+//		if (hasBlock(LocalBlockPos(pos.x - 1, pos.z, pos.y), block_id, 2))   // state:outter 
+//		{
+//			state = 0;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x - 1, pos.z, pos.y), block_id, 3))   // state:outter
+//		{
+//			state = 1;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x + 1, pos.z, pos.y), block_id, 2))        // state:inner 
+//		{
+//			state = 2;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x + 1, pos.z, pos.y), block_id, 3))   // state:inner 
+//		{
+//			state = 3;
+//		}
+//		else
+//			state = 7;
+//	}
+//
+//	// facing "z-"
+//	if (data == 2)
+//	{
+//		if (hasBlock(LocalBlockPos(pos.x, pos.z + 1, pos.y), block_id, 0))        // state:outter 
+//		{
+//			state = 0;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x, pos.z + 1, pos.y), block_id, 1))   // state:outter 
+//		{
+//			state = 1;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x, pos.z - 1, pos.y), block_id, 0))   // state:inner 
+//		{
+//			state = 2;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x, pos.z - 1, pos.y), block_id, 1))   // state:inner
+//		{
+//			state = 3;
+//		}
+//		else
+//			state = 7;
+//
+//	}
+//
+//	// facing "z+"
+//	if (data == 3)
+//	{
+//		if (hasBlock(LocalBlockPos(pos.x, pos.z - 1, pos.y), block_id, 0))   // state:outter 
+//		{
+//			state = 0;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x, pos.z - 1, pos.y), block_id, 1))   // state:outter
+//		{
+//			state = 1;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x, pos.z + 1, pos.y), block_id, 0))        // state:inner 
+//		{
+//			state = 2;
+//		}
+//		else if (hasBlock(LocalBlockPos(pos.x, pos.z + 1, pos.y), block_id, 1))   // state:inner 
+//		{
+//			state = 3;
+//		}
+//		else
+//			state = 7;
+//	}
+//	return state;
+//}
+//
+//uint8_t Chunk::getBlockState(const LocalBlockPos& pos) const{
+//	uint8_t state = 0;
+//	uint16_t block_id = getBlockID(pos);
+//	if (block_id == 53)
+//	{
+//		state = getStairsBlockState(pos, block_id);
+//	}
+//	return state;
+//}
+
 const ChunkPos& Chunk::getPos() const {
 	return pos;
 }
