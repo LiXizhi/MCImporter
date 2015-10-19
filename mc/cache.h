@@ -114,6 +114,8 @@ public:
 
 	const CacheStats& getRegionCacheStats() const;
 	const CacheStats& getChunkCacheStats() const;
+	uint16_t WorldCache::getBlockID(BlockPos& pos);
+	bool WorldCache::hasSolidBlock(BlockPos& pos);
 
 	bool hasBlock(BlockPos blockpos, uint16_t block_id, uint8_t data = 255, uint8_t state = 255);
 };

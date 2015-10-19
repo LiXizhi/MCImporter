@@ -326,14 +326,104 @@ uint8_t getStairsBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, u
 	return state;
 }
 
+// fence
+template<typename pObjectType, typename PosType>
+uint8_t getFenceBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_t data)
+{
+	uint8_t state = 0;
+	//uint8_t data = getBlockData(pos);
+	// facing "x-"
+	bool hasSolidBlockInPositiveX = pobj->hasSolidBlock(PosType(pos.x + 1, pos.z, pos.y));
+	bool hasSolidBlockInNegativeX = pobj->hasSolidBlock(PosType(pos.x - 1, pos.z, pos.y));
+	bool hasSolidBlockInPositiveZ = pobj->hasSolidBlock(PosType(pos.x, pos.z + 1, pos.y));
+	bool hasSolidBlockInNegativeZ = pobj->hasSolidBlock(PosType(pos.x, pos.z - 1, pos.y));
+
+	if ((! hasSolidBlockInPositiveX) && (! hasSolidBlockInNegativeX) && (! hasSolidBlockInPositiveZ) && (! hasSolidBlockInNegativeZ))        
+	{
+		state = 0;
+	}
+	else if ( hasSolidBlockInPositiveX && (! hasSolidBlockInNegativeX) && (! hasSolidBlockInPositiveZ) && (! hasSolidBlockInNegativeZ))        
+	{
+		state = 1;
+	}
+	else if ((! hasSolidBlockInPositiveX) &&  hasSolidBlockInNegativeX && (! hasSolidBlockInPositiveZ) && (! hasSolidBlockInNegativeZ))
+	{
+		state = 2;
+	}
+	else if ((! hasSolidBlockInPositiveX) && (! hasSolidBlockInNegativeX) &&  hasSolidBlockInPositiveZ && (! hasSolidBlockInNegativeZ))
+	{
+		state = 3;
+	}
+	else if ((! hasSolidBlockInPositiveX) && (! hasSolidBlockInNegativeX) && (! hasSolidBlockInPositiveZ) &&  hasSolidBlockInNegativeZ)
+	{
+		state = 4;
+	}
+	else if ( hasSolidBlockInPositiveX &&  hasSolidBlockInNegativeX && (! hasSolidBlockInPositiveZ) && (! hasSolidBlockInNegativeZ))
+	{
+		state = 5;
+	}
+	else if ( hasSolidBlockInPositiveX && (! hasSolidBlockInNegativeX) &&  hasSolidBlockInPositiveZ && (! hasSolidBlockInNegativeZ))
+	{
+		state = 6;
+	}
+	else if ( hasSolidBlockInPositiveX && (! hasSolidBlockInNegativeX) && (! hasSolidBlockInPositiveZ) &&  hasSolidBlockInNegativeZ)
+	{
+		state = 7;
+	}
+	else if ((! hasSolidBlockInPositiveX) &&  hasSolidBlockInNegativeX &&  hasSolidBlockInPositiveZ && (! hasSolidBlockInNegativeZ))
+	{
+		state = 8;
+	}
+	else if ((! hasSolidBlockInPositiveX) &&  hasSolidBlockInNegativeX && (! hasSolidBlockInPositiveZ) &&  hasSolidBlockInNegativeZ)
+	{
+		state = 9;
+	}
+	else if ((! hasSolidBlockInPositiveX) && (! hasSolidBlockInNegativeX) &&  hasSolidBlockInPositiveZ &&  hasSolidBlockInNegativeZ)
+	{
+		state = 10;
+	}
+	else if ((! hasSolidBlockInPositiveX) &&  hasSolidBlockInNegativeX &&  hasSolidBlockInPositiveZ &&  hasSolidBlockInNegativeZ)
+	{
+		state = 11;
+	}
+	else if ( hasSolidBlockInPositiveX && (! hasSolidBlockInNegativeX) &&  hasSolidBlockInPositiveZ &&  hasSolidBlockInNegativeZ)
+	{
+		state = 12;
+	}
+	else if ( hasSolidBlockInPositiveX &&  hasSolidBlockInNegativeX && (! hasSolidBlockInPositiveZ) &&  hasSolidBlockInNegativeZ)
+	{
+		state = 13;
+	}
+	else if ( hasSolidBlockInPositiveX &&  hasSolidBlockInNegativeX &&  hasSolidBlockInPositiveZ && (! hasSolidBlockInNegativeZ))
+	{
+		state = 14;
+	}
+	else
+	{
+		state = 15;
+	}
+
+	return state;
+}
+
 template<typename pObjectType, typename PosType>
 uint8_t getBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_t data)
 {
 	uint8_t state = 0;
 	//uint16_t block_id = getBlockID(pos);
-	if (block_id == 53)
+	if (block_id == 53 || block_id == 67 || block_id == 108 || block_id == 109 || block_id == 114 || block_id == 128 || block_id == 134 || block_id == 135 || block_id == 136 || block_id == 156
+		|| block_id == 163 || block_id == 164 || block_id == 180)
 	{
 		state = getStairsBlockState(pobj, pos, block_id, data);
+	}
+	else if (block_id == 85)
+	{
+		state = getFenceBlockState(pobj, pos, block_id, data);
+	}
+	else if (block_id == 101 || block_id == 102 || block_id == 139)
+	{
+		// we deal with the ¡°iron_bars¡± and ¡°glass_pane¡± ¡°cobblestone_wall¡± block including "16 states";
+		state = getFenceBlockState(pobj, pos, block_id, data);
 	}
 	return state;
 }
@@ -403,11 +493,11 @@ bool GetRegionBlocks(int x, int z, std::vector<int> *blocks)
 							blocks->push_back(gpos.y);
 							blocks->push_back(gpos.z);
 							uint16_t block_side = 0;
-							if (!MCBlock::TranslateMCBlock(block_id, block_data,block_state,block_side))
+							/*if (!MCBlock::TranslateMCBlock(block_id, block_data,block_state,block_side))
 							{
 								char sMsg[130];
 								snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x,gpos.y,gpos.z,block_id,block_data,block_state);
-							}
+							}*/
 							blocks->push_back((int)block_id);
 							blocks->push_back((int)block_data);
 							blocks->push_back((int)block_side);

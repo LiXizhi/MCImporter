@@ -295,7 +295,11 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(49, 0, 146, 0);
 
 	// torch
-	AddBlockInfoToMap(50, 0, 100, 0);
+	AddBlockInfoToMap(50, 1, 100, 3); //facing:x+
+	AddBlockInfoToMap(50, 2, 100, 1); //facing:x-
+	AddBlockInfoToMap(50, 3, 100, 2); //facing:z+
+	AddBlockInfoToMap(50, 4, 100, 4); //facing:z-
+	AddBlockInfoToMap(50, 5, 100, 5); //facing:up
 
 	// fire (can not find the replace block in paracraft)
 	AddBlockInfoToMap(51, 0, 0, 0);
@@ -378,128 +382,1242 @@ void MCBlock::InitTranslateMap()
 	// lit_furnace (can not find the replace block in paracraft)
 	//AddBlockInfoToMap(62, 0, 176, 0);
 
-	// standing_sign
-	// face z+
-	AddBlockInfoToMap(63, 0, 211, 2);
+	// standing_sign ()
+	AddBlockInfoToMap(63, 0, 211, 2);   // south 
+	AddBlockInfoToMap(63, 1, 211, 2);	// south - southwest
+	AddBlockInfoToMap(63, 2, 211, 2);	// southwest
+	AddBlockInfoToMap(63, 3, 211, 1);	// west - southwest
+	AddBlockInfoToMap(63, 4, 211, 1);	// west
+	AddBlockInfoToMap(63, 5, 211, 1);	// west - northwest
+	AddBlockInfoToMap(63, 6, 211, 1);	// northwest
+	AddBlockInfoToMap(63, 7, 211, 3);	// north - northwest
+	AddBlockInfoToMap(63, 8, 211, 3);	// north
+	AddBlockInfoToMap(63, 9, 211, 3);	// north - northeast
+	AddBlockInfoToMap(63, 10, 211, 3);	// northeast
+	AddBlockInfoToMap(63, 11, 211, 0);	// east - northeast
+	AddBlockInfoToMap(63, 12, 211, 0);	// east
+	AddBlockInfoToMap(63, 13, 211, 0);	// east - southeast
+	AddBlockInfoToMap(63, 14, 211, 0);	// southeast
+	AddBlockInfoToMap(63, 15, 211, 2);	// south - southeast
+
+	// wooden_door  (not complete)
+	AddBlockInfoToMap(64, 0, 176, 0);  //facing:;hinge:;half:;open/powered:;
+	AddBlockInfoToMap(64, 1, 176, 0);  //facing:z-;hinge:left;half:lower;open/powered:off;
+	AddBlockInfoToMap(64, 8, 176, 0);  //facing:z-;hinge:left;half:upper;open/powered:off;
+
+	// ladder
+	AddBlockInfoToMap(65, 2, 166, 5); //facing:z-
+	AddBlockInfoToMap(65, 3, 166, 1); //facing:z+
+	AddBlockInfoToMap(65, 4, 166, 4); //facing:x-
+	AddBlockInfoToMap(65, 5, 166, 3); //facing:x+
+
+	// rail
+	AddBlockInfoToMap(66, 0, 103, 2); //flat and around z 
+	AddBlockInfoToMap(66, 1, 103, 1); //flat and around x  
+	AddBlockInfoToMap(66, 2, 103, 7);//from low to high and around x
+	AddBlockInfoToMap(66, 3, 103, 9);//from high to low and around x
+	AddBlockInfoToMap(66, 4, 103, 10);//from high to low and around z
+	AddBlockInfoToMap(66, 5, 103, 8);//from low to high and around z
+
+	// stone_stairs
 	// face x-
-	AddBlockInfoToMap(63, 4, 211, 1);
-	// face z-
-	AddBlockInfoToMap(63, 8, 211, 3);
-	// face x+
-	AddBlockInfoToMap(63, 11, 211, 0); //slope
-	AddBlockInfoToMap(63, 12, 211, 0); //front
-	AddBlockInfoToMap(63, 13, 211, 0); //slope
+	AddBlockInfoToMap(67, 0, 175, 5, 0); // state:outter 
+	AddBlockInfoToMap(67, 0, 175, 8, 1); // state:outter 
+	AddBlockInfoToMap(67, 0, 175, 18, 2);// state:inner
+	AddBlockInfoToMap(67, 0, 175, 21, 3);// state:inner
+	AddBlockInfoToMap(67, 0, 175, 1, 7); // state:normal
+	// face x+		  		 
+	AddBlockInfoToMap(67, 1, 175, 6, 0); // state:outter
+	AddBlockInfoToMap(67, 1, 175, 7, 1); // state:outter
+	AddBlockInfoToMap(67, 1, 175, 19, 2);// state:inner
+	AddBlockInfoToMap(67, 1, 175, 20, 3);// state:inner
+	AddBlockInfoToMap(67, 1, 175, 2, 7); // state:normal
+	// face z-		  		 
+	AddBlockInfoToMap(67, 2, 175, 5, 0); // state:outter
+	AddBlockInfoToMap(67, 2, 175, 8, 1); // state:outter
+	AddBlockInfoToMap(67, 2, 175, 18, 2);// state:inner
+	AddBlockInfoToMap(67, 2, 175, 21, 3);// state:inner
+	AddBlockInfoToMap(67, 2, 175, 4, 7); // state:normal
+	// face z-		  		 
+	AddBlockInfoToMap(67, 3, 175, 6, 0); // state:outter
+	AddBlockInfoToMap(67, 3, 175, 7, 1); // state:outter
+	AddBlockInfoToMap(67, 3, 175, 19, 2);// state:inner
+	AddBlockInfoToMap(67, 3, 175, 20, 3);// state:inner
+	AddBlockInfoToMap(67, 3, 175, 3, 7); // state:normal
 
-	// obsidian block in mc
-	AddBlockInfoToMap(64, 0, 176, 0);
+	// wall_sign
+	AddBlockInfoToMap(68, 2, 176, 3); //facing:z-
+	AddBlockInfoToMap(68, 3, 176, 2); //facing:z+
+	AddBlockInfoToMap(68, 4, 176, 1); //facing:x-
+	AddBlockInfoToMap(68, 5, 176, 0); //facing:x+
 
-	// obsidian block in mc
-	AddBlockInfoToMap(65, 0, 176, 0);
+	// lever
+	AddBlockInfoToMap(69, 0, 190, 6); //facing:down;open:off;around:x
+	AddBlockInfoToMap(69, 1, 190, 3); //facing:x+;open:off
+	AddBlockInfoToMap(69, 2, 190, 1); //facing:x-;open:off
+	AddBlockInfoToMap(69, 3, 190, 2); //facing:z+;open:off
+	AddBlockInfoToMap(69, 4, 190, 4); //facing:z-;open:off
+	AddBlockInfoToMap(69, 5, 190, 5); //facing:up;open:off;around:z
+	AddBlockInfoToMap(69, 6, 190, 5); //facing:up;open:off;around:x
+	AddBlockInfoToMap(69, 7, 190, 6); //facing:down;open:off;around:z
+	AddBlockInfoToMap(69, 8, 190, 14); //facing:down;open:on;around:x
+	AddBlockInfoToMap(69, 9, 190, 11);  //facing:x+;open:on 
+	AddBlockInfoToMap(69, 10, 190, 9); //facing:x-;open:on
+	AddBlockInfoToMap(69, 11, 190, 10); //facing:z+;open:on
+	AddBlockInfoToMap(69, 12, 190, 12); //facing:z-;open:on
+	AddBlockInfoToMap(69, 13, 190, 13); //facing:up;open:on;around:z
+	AddBlockInfoToMap(69, 14, 190, 13); //facing:up;open:on;around:x
+	AddBlockInfoToMap(69, 15, 190, 14); //facing:down;open:on;around:z
 
-	// obsidian block in mc
-	AddBlockInfoToMap(66, 0, 176, 0);
+	// stone_pressure_plate
+	AddBlockInfoToMap(70, 0, 200, 0);
+	AddBlockInfoToMap(70, 1, 200, 1);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(67, 0, 176, 0);
-
-	// obsidian block in mc
-	AddBlockInfoToMap(68, 0, 176, 0);
-
-	// obsidian block in mc
-	AddBlockInfoToMap(69, 0, 176, 0);
-
-	// obsidian block in mc
-	AddBlockInfoToMap(70, 0, 176, 0);
-
-	// obsidian block in mc
+	// iron_door
 	AddBlockInfoToMap(71, 0, 176, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(70, 0, 176, 0);
+	// wooden_pressure_plate
+	AddBlockInfoToMap(72, 0, 201, 0);
+	AddBlockInfoToMap(72, 1, 201, 1);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(73, 0, 176, 0);
+	// redstone_ore
+	AddBlockInfoToMap(73, 0, 157, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(74, 0, 176, 0);
+	// lit_redstone_ore
+	AddBlockInfoToMap(74, 0, 157, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(75, 0, 176, 0);
+	// unlit_redstone_torch
+	AddBlockInfoToMap(75, 1, 191, 3); //facing:x+
+	AddBlockInfoToMap(75, 2, 191, 1); //facing:x-
+	AddBlockInfoToMap(75, 3, 191, 2); //facing:z+
+	AddBlockInfoToMap(75, 4, 191, 4); //facing:z-
+	AddBlockInfoToMap(75, 5, 191, 5); //facing:up
 
-	// obsidian block in mc
-	AddBlockInfoToMap(76, 0, 176, 0);
+	// redstone_torch
+	AddBlockInfoToMap(76, 1, 192, 3); //facing:x+
+	AddBlockInfoToMap(76, 2, 192, 1); //facing:x-
+	AddBlockInfoToMap(76, 3, 192, 2); //facing:z+
+	AddBlockInfoToMap(76, 4, 192, 4); //facing:z-
+	AddBlockInfoToMap(76, 5, 192, 5); //facing:up
 
-	// obsidian block in mc
-	AddBlockInfoToMap(77, 0, 176, 0);
+	// stone_button
+	AddBlockInfoToMap(77, 0, 176, 0); //facing:down
+	AddBlockInfoToMap(77, 1, 176, 0); //facing:x+
+	AddBlockInfoToMap(77, 2, 176, 0); //facing:x-
+	AddBlockInfoToMap(77, 3, 176, 0); //facing:z+
+	AddBlockInfoToMap(77, 4, 176, 0); //facing:z-
+	AddBlockInfoToMap(77, 5, 176, 0); //facing:up
 
-	// obsidian block in mc
-	AddBlockInfoToMap(78, 0, 176, 0);
+	// only translate block
 
-	// obsidian block in mc
-	AddBlockInfoToMap(79, 0, 176, 0);
+	// snow_layer
+	AddBlockInfoToMap(78, 0, 5, 0);
+	AddBlockInfoToMap(78, 1, 5, 0);
+	AddBlockInfoToMap(78, 2, 5, 0);
+	AddBlockInfoToMap(78, 3, 5, 0);
+	AddBlockInfoToMap(78, 4, 5, 0);
+	AddBlockInfoToMap(78, 5, 5, 0);
+	AddBlockInfoToMap(78, 6, 5, 0);
+	AddBlockInfoToMap(78, 7, 5, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(80, 0, 176, 0);
+	// ice
+	AddBlockInfoToMap(79, 0, 176, 17);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(81, 0, 176, 0);
+	// snow
+	AddBlockInfoToMap(80, 0, 161, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(82, 0, 176, 0);
+	// cactus (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(81, 0, 176, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(83, 0, 176, 0);
+	// clay
+	AddBlockInfoToMap(82, 0, 53, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(84, 0, 176, 0);
+	// reeds
+	AddBlockInfoToMap(83, 0, 161, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(85, 0, 176, 0);
+	// jukebox (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(84, 0, 176, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(86, 0, 176, 0);
+	// fence
+	AddBlockInfoToMap(85, 0, 101, 1, 0);
+	AddBlockInfoToMap(85, 0, 101, 2, 1);
+	AddBlockInfoToMap(85, 0, 101, 4, 2);
+	AddBlockInfoToMap(85, 0, 101, 5, 3);
+	AddBlockInfoToMap(85, 0, 101, 3, 4);
+	AddBlockInfoToMap(85, 0, 101, 14, 5);
+	AddBlockInfoToMap(85, 0, 101, 6, 6);
+	AddBlockInfoToMap(85, 0, 101, 9, 7);
+	AddBlockInfoToMap(85, 0, 101, 7, 8);
+	AddBlockInfoToMap(85, 0, 101, 8, 9);
+	AddBlockInfoToMap(85, 0, 101, 15, 10);
+	AddBlockInfoToMap(85, 0, 101, 11, 11);
+	AddBlockInfoToMap(85, 0, 101, 13, 12);
+	AddBlockInfoToMap(85, 0, 101, 10, 13);
+	AddBlockInfoToMap(85, 0, 101, 12, 14);
+	AddBlockInfoToMap(85, 0, 101, 16, 15);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(87, 0, 176, 0);
+	// pumpkin
+	AddBlockInfoToMap(86, 0, 149, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(88, 0, 176, 0);
+	// netherrack
+	AddBlockInfoToMap(87, 0, 150, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(89, 0, 176, 0);
+	// soul_sand
+	AddBlockInfoToMap(88, 0, 151, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(90, 0, 176, 0);
+	// glowstone
+	AddBlockInfoToMap(89, 0, 87, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(91, 0, 176, 0);
+	// portal (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(90, 0, 176, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(92, 0, 176, 0);
+	// lit_pumpkin
+	AddBlockInfoToMap(91, 0, 220, 0);
 
-	// obsidian block in mc
+	// cake
+	AddBlockInfoToMap(92, 0, 84, 0);
+
+	// unpowered_repeater
 	AddBlockInfoToMap(93, 0, 176, 0);
 
-	// obsidian block in mc
+	// powered_repeater
 	AddBlockInfoToMap(94, 0, 176, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(95, 0, 176, 0);
+	// stained_glass
+	AddBlockInfoToMap(95, 0, 95, 0);
+	AddBlockInfoToMap(95, 1, 95, 0);
+	AddBlockInfoToMap(95, 2, 95, 0);
+	AddBlockInfoToMap(95, 3, 95, 0);
+	AddBlockInfoToMap(95, 4, 95, 0);
+	AddBlockInfoToMap(95, 5, 95, 0);
+	AddBlockInfoToMap(95, 6, 95, 0);
+	AddBlockInfoToMap(95, 7, 95, 0);
+	AddBlockInfoToMap(95, 8, 95, 0);
+	AddBlockInfoToMap(95, 9, 95, 0);
+	AddBlockInfoToMap(95, 10, 95, 0);
+	AddBlockInfoToMap(95, 11, 95, 0);
+	AddBlockInfoToMap(95, 12, 95, 0);
+	AddBlockInfoToMap(95, 13, 95, 0);
+	AddBlockInfoToMap(95, 14, 95, 0);
+	AddBlockInfoToMap(95, 15, 95, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(96, 0, 176, 0);
 
-	// obsidian block in mc
-	AddBlockInfoToMap(97, 0, 176, 0);
+	// trapdoor
+	AddBlockInfoToMap(96, 8, 108, 0);
+	AddBlockInfoToMap(96, 9, 108, 0);
+	AddBlockInfoToMap(96, 10, 108, 0);
+	AddBlockInfoToMap(96, 11, 108, 0);
 
-	// obsidian
-	AddBlockInfoToMap(98, 0, 176, 0);
+	// monster_egg (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(97, 0, 176, 0);
 
-	// obsidian
-	AddBlockInfoToMap(99, 0, 176, 0);
+	// stonebrick
+	AddBlockInfoToMap(98, 0, 68, 0);
+	AddBlockInfoToMap(98, 1, 68, 0);
+	AddBlockInfoToMap(98, 2, 68, 0);
+	AddBlockInfoToMap(98, 3, 68, 0);
 
-	// obsidian
-	AddBlockInfoToMap(100, 0, 176, 0);
+	// brown_mushroom_block
+	AddBlockInfoToMap(99, 0, 141, 0);
+
+	// red_mushroom_block
+	AddBlockInfoToMap(100, 0, 117, 0);
+
+	// iron_bars
+	AddBlockInfoToMap(101, 0, 209, 11, 0);
+	AddBlockInfoToMap(101, 0, 209, 1, 1);
+	AddBlockInfoToMap(101, 0, 209, 1, 2);
+	AddBlockInfoToMap(101, 0, 209, 2, 3);
+	AddBlockInfoToMap(101, 0, 209, 2, 4);
+	AddBlockInfoToMap(101, 0, 209, 1, 5);
+	AddBlockInfoToMap(101, 0, 209, 3, 6);
+	AddBlockInfoToMap(101, 0, 209, 6, 7);
+	AddBlockInfoToMap(101, 0, 209, 4, 8);
+	AddBlockInfoToMap(101, 0, 209, 5, 9);
+	AddBlockInfoToMap(101, 0, 209, 2, 10);
+	AddBlockInfoToMap(101, 0, 209, 8, 11);
+	AddBlockInfoToMap(101, 0, 209, 10, 12);
+	AddBlockInfoToMap(101, 0, 209, 7, 13);
+	AddBlockInfoToMap(101, 0, 209, 9, 14);
+	AddBlockInfoToMap(101, 0, 209, 11, 15);
+
+	// glass_pane
+	AddBlockInfoToMap(102, 0, 102, 11, 0);
+	AddBlockInfoToMap(102, 0, 102, 1, 1);
+	AddBlockInfoToMap(102, 0, 102, 1, 2);
+	AddBlockInfoToMap(102, 0, 102, 2, 3);
+	AddBlockInfoToMap(102, 0, 102, 2, 4);
+	AddBlockInfoToMap(102, 0, 102, 1, 5);
+	AddBlockInfoToMap(102, 0, 102, 3, 6);
+	AddBlockInfoToMap(102, 0, 102, 6, 7);
+	AddBlockInfoToMap(102, 0, 102, 4, 8);
+	AddBlockInfoToMap(102, 0, 102, 5, 9);
+	AddBlockInfoToMap(102, 0, 102, 2, 10);
+	AddBlockInfoToMap(102, 0, 102, 8, 11);
+	AddBlockInfoToMap(102, 0, 102, 10, 12);
+	AddBlockInfoToMap(102, 0, 102, 7, 13);
+	AddBlockInfoToMap(102, 0, 102, 9, 14);
+	AddBlockInfoToMap(102, 0, 102, 11, 15);
+
+	// melon_block
+	AddBlockInfoToMap(103, 0, 152, 0);
+
+	// pumpkin_stem (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(104, 0, 117, 0);
+
+	// melon_stem (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(105, 0, 117, 0);
+
+	// vine
+	AddBlockInfoToMap(106, 1, 117, 5); //facing:z-
+	AddBlockInfoToMap(106, 2, 117, 3); //facing:x+
+	AddBlockInfoToMap(106, 4, 117, 1); //facing:z+
+	AddBlockInfoToMap(106, 8, 117, 4); //facing:x-
+
+	// fence_gate (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(107, 0, 117, 0);
+
+	// brick_stairs
+	// face x-
+	AddBlockInfoToMap(108, 0, 167, 5, 0); // state:outter 
+	AddBlockInfoToMap(108, 0, 167, 8, 1); // state:outter 
+	AddBlockInfoToMap(108, 0, 167, 18, 2);// state:inner
+	AddBlockInfoToMap(108, 0, 167, 21, 3);// state:inner
+	AddBlockInfoToMap(108, 0, 167, 1, 7); // state:normal
+	// face x+		  		  
+	AddBlockInfoToMap(108, 1, 167, 6, 0); // state:outter
+	AddBlockInfoToMap(108, 1, 167, 7, 1); // state:outter
+	AddBlockInfoToMap(108, 1, 167, 19, 2);// state:inner
+	AddBlockInfoToMap(108, 1, 167, 20, 3);// state:inner
+	AddBlockInfoToMap(108, 1, 167, 2, 7); // state:normal
+	// face z-		  		  
+	AddBlockInfoToMap(108, 2, 167, 5, 0); // state:outter
+	AddBlockInfoToMap(108, 2, 167, 8, 1); // state:outter
+	AddBlockInfoToMap(108, 2, 167, 18, 2);// state:inner
+	AddBlockInfoToMap(108, 2, 167, 21, 3);// state:inner
+	AddBlockInfoToMap(108, 2, 167, 4, 7); // state:normal
+	// face z-		  		  
+	AddBlockInfoToMap(108, 3, 167, 6, 0); // state:outter
+	AddBlockInfoToMap(108, 3, 167, 7, 1); // state:outter
+	AddBlockInfoToMap(108, 3, 167, 19, 2);// state:inner
+	AddBlockInfoToMap(108, 3, 167, 20, 3);// state:inner
+	AddBlockInfoToMap(108, 3, 167, 3, 7); // state:normal
+
+	// stone_brick_stairs
+	// face x-
+	AddBlockInfoToMap(109, 0, 168, 5, 0); // state:outter 
+	AddBlockInfoToMap(109, 0, 168, 8, 1); // state:outter 
+	AddBlockInfoToMap(109, 0, 168, 18, 2);// state:inner
+	AddBlockInfoToMap(109, 0, 168, 21, 3);// state:inner
+	AddBlockInfoToMap(109, 0, 168, 1, 7); // state:normal
+	// face x+		  		  
+	AddBlockInfoToMap(109, 1, 168, 6, 0); // state:outter
+	AddBlockInfoToMap(109, 1, 168, 7, 1); // state:outter
+	AddBlockInfoToMap(109, 1, 168, 19, 2);// state:inner
+	AddBlockInfoToMap(109, 1, 168, 20, 3);// state:inner
+	AddBlockInfoToMap(109, 1, 168, 2, 7); // state:normal
+	// face z-		  		  
+	AddBlockInfoToMap(109, 2, 168, 5, 0); // state:outter
+	AddBlockInfoToMap(109, 2, 168, 8, 1); // state:outter
+	AddBlockInfoToMap(109, 2, 168, 18, 2);// state:inner
+	AddBlockInfoToMap(109, 2, 168, 21, 3);// state:inner
+	AddBlockInfoToMap(109, 2, 168, 4, 7); // state:normal
+	// face z-		  		  
+	AddBlockInfoToMap(109, 3, 168, 6, 0); // state:outter
+	AddBlockInfoToMap(109, 3, 168, 7, 1); // state:outter
+	AddBlockInfoToMap(109, 3, 168, 19, 2);// state:inner
+	AddBlockInfoToMap(109, 3, 168, 20, 3);// state:inner
+	AddBlockInfoToMap(109, 3, 168, 3, 7); // state:normal
+
+	// mycelium (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(110, 0, 117, 0);
+
+	// waterlily
+	AddBlockInfoToMap(111, 0, 222, 0);
+
+	// nether_brick
+	AddBlockInfoToMap(112, 0, 154, 0);
+
+	// nether_brick_fence
+	AddBlockInfoToMap(113, 0, 101, 1, 0);
+	AddBlockInfoToMap(113, 0, 101, 2, 1);
+	AddBlockInfoToMap(113, 0, 101, 4, 2);
+	AddBlockInfoToMap(113, 0, 101, 5, 3);
+	AddBlockInfoToMap(113, 0, 101, 3, 4);
+	AddBlockInfoToMap(113, 0, 101, 14, 5);
+	AddBlockInfoToMap(113, 0, 101, 6, 6);
+	AddBlockInfoToMap(113, 0, 101, 9, 7);
+	AddBlockInfoToMap(113, 0, 101, 7, 8);
+	AddBlockInfoToMap(113, 0, 101, 8, 9);
+	AddBlockInfoToMap(113, 0, 101, 15, 10);
+	AddBlockInfoToMap(113, 0, 101, 11, 11);
+	AddBlockInfoToMap(113, 0, 101, 13, 12);
+	AddBlockInfoToMap(113, 0, 101, 10, 13);
+	AddBlockInfoToMap(113, 0, 101, 12, 14);
+	AddBlockInfoToMap(113, 0, 101, 16, 15);
+
+	// nether_brick_stairs
+	// face x-
+	AddBlockInfoToMap(114, 0, 169, 5, 0); // state:outter 
+	AddBlockInfoToMap(114, 0, 169, 8, 1); // state:outter 
+	AddBlockInfoToMap(114, 0, 169, 18, 2);// state:inner
+	AddBlockInfoToMap(114, 0, 169, 21, 3);// state:inner
+	AddBlockInfoToMap(114, 0, 169, 1, 7); // state:normal
+	// face x+		    		
+	AddBlockInfoToMap(114, 1, 169, 6, 0); // state:outter
+	AddBlockInfoToMap(114, 1, 169, 7, 1); // state:outter
+	AddBlockInfoToMap(114, 1, 169, 19, 2);// state:inner
+	AddBlockInfoToMap(114, 1, 169, 20, 3);// state:inner
+	AddBlockInfoToMap(114, 1, 169, 2, 7); // state:normal
+	// face z-		    		
+	AddBlockInfoToMap(114, 2, 169, 5, 0); // state:outter
+	AddBlockInfoToMap(114, 2, 169, 8, 1); // state:outter
+	AddBlockInfoToMap(114, 2, 169, 18, 2);// state:inner
+	AddBlockInfoToMap(114, 2, 169, 21, 3);// state:inner
+	AddBlockInfoToMap(114, 2, 169, 4, 7); // state:normal
+	// face z-		    		
+	AddBlockInfoToMap(114, 3, 169, 6, 0); // state:outter
+	AddBlockInfoToMap(114, 3, 169, 7, 1); // state:outter
+	AddBlockInfoToMap(114, 3, 169, 19, 2);// state:inner
+	AddBlockInfoToMap(114, 3, 169, 20, 3);// state:inner
+	AddBlockInfoToMap(114, 3, 169, 3, 7); // state:normal
+
+	// nether_wart (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(115, 0, 117, 0);
+
+	// enchanting_table (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(116, 0, 117, 0);
+
+	// brewing_stand (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(117, 0, 117, 0);
+
+	// cauldron (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(118, 0, 117, 0);
+
+	// end_portal (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(119, 0, 117, 0);
+
+	// end_portal_frame (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(120, 0, 117, 0);
+
+	// end_stone
+	AddBlockInfoToMap(121, 0, 155, 0);
+
+	// dragon_egg (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(122, 0, 117, 0);
+
+	// redstone_lamp
+	AddBlockInfoToMap(123, 0, 6, 0);
+
+	// lit_redstone_lamp
+	AddBlockInfoToMap(124, 0, 6, 0);
+
+	// double_wooden_slab
+	AddBlockInfoToMap(125, 0, 81, 0);
+
+	// wooden_slab
+	AddBlockInfoToMap(126, 0, 160, 0);
+
+	// cocoa (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(127, 0, 117, 0);
+
+	// sandstone_stairs
+	// face x-
+	AddBlockInfoToMap(128, 0, 104, 5, 0); // state:outter 
+	AddBlockInfoToMap(128, 0, 104, 8, 1); // state:outter 
+	AddBlockInfoToMap(128, 0, 104, 18, 2);// state:inner
+	AddBlockInfoToMap(128, 0, 104, 21, 3);// state:inner
+	AddBlockInfoToMap(128, 0, 104, 1, 7); // state:normal
+	// face x+		   		   
+	AddBlockInfoToMap(128, 1, 104, 6, 0); // state:outter
+	AddBlockInfoToMap(128, 1, 104, 7, 1); // state:outter
+	AddBlockInfoToMap(128, 1, 104, 19, 2);// state:inner
+	AddBlockInfoToMap(128, 1, 104, 20, 3);// state:inner
+	AddBlockInfoToMap(128, 1, 104, 2, 7); // state:normal
+	// face z-		   		   
+	AddBlockInfoToMap(128, 2, 104, 5, 0); // state:outter
+	AddBlockInfoToMap(128, 2, 104, 8, 1); // state:outter
+	AddBlockInfoToMap(128, 2, 104, 18, 2);// state:inner
+	AddBlockInfoToMap(128, 2, 104, 21, 3);// state:inner
+	AddBlockInfoToMap(128, 2, 104, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(128, 3, 104, 6, 0); // state:outter
+	AddBlockInfoToMap(128, 3, 104, 7, 1); // state:outter
+	AddBlockInfoToMap(128, 3, 104, 19, 2);// state:inner
+	AddBlockInfoToMap(128, 3, 104, 20, 3);// state:inner
+	AddBlockInfoToMap(128, 3, 104, 3, 7); // state:normal
+
+	// emerald_ore
+	AddBlockInfoToMap(129, 0, 2, 0);
+
+	// ender_chest (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(130, 0, 117, 0);
+
+	// tripwire_hook (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(131, 0, 117, 0);
+
+	// tripwire (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(132, 0, 117, 0);
+
+	// emerald_block
+	AddBlockInfoToMap(133, 0, 156, 0);
+
+	// spruce_stairs
+	// face x-
+	AddBlockInfoToMap(134, 0, 117, 5, 0); // state:outter 
+	AddBlockInfoToMap(134, 0, 117, 8, 1); // state:outter 
+	AddBlockInfoToMap(134, 0, 117, 18, 2);// state:inner
+	AddBlockInfoToMap(134, 0, 117, 21, 3);// state:inner
+	AddBlockInfoToMap(134, 0, 117, 1, 7); // state:normal
+	// face x+		     	   
+	AddBlockInfoToMap(134, 1, 117, 6, 0); // state:outter
+	AddBlockInfoToMap(134, 1, 117, 7, 1); // state:outter
+	AddBlockInfoToMap(134, 1, 117, 19, 2);// state:inner
+	AddBlockInfoToMap(134, 1, 117, 20, 3);// state:inner
+	AddBlockInfoToMap(134, 1, 117, 2, 7); // state:normal
+	// face z-		      	   
+	AddBlockInfoToMap(134, 2, 117, 5, 0); // state:outter
+	AddBlockInfoToMap(134, 2, 117, 8, 1); // state:outter
+	AddBlockInfoToMap(134, 2, 117, 18, 2);// state:inner
+	AddBlockInfoToMap(134, 2, 117, 21, 3);// state:inner
+	AddBlockInfoToMap(134, 2, 117, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(134, 3, 117, 6, 0); // state:outter
+	AddBlockInfoToMap(134, 3, 117, 7, 1); // state:outter
+	AddBlockInfoToMap(134, 3, 117, 19, 2);// state:inner
+	AddBlockInfoToMap(134, 3, 117, 20, 3);// state:inner
+	AddBlockInfoToMap(134, 3, 117, 3, 7); // state:normal
+
+	// birch_stairs
+	// face x-
+	AddBlockInfoToMap(135, 0, 172, 5, 0); // state:outter 
+	AddBlockInfoToMap(135, 0, 172, 8, 1); // state:outter 
+	AddBlockInfoToMap(135, 0, 172, 18, 2);// state:inner
+	AddBlockInfoToMap(135, 0, 172, 21, 3);// state:inner
+	AddBlockInfoToMap(135, 0, 172, 1, 7); // state:normal
+	// face x+		   	   	   
+	AddBlockInfoToMap(135, 1, 172, 6, 0); // state:outter
+	AddBlockInfoToMap(135, 1, 172, 7, 1); // state:outter
+	AddBlockInfoToMap(135, 1, 172, 19, 2);// state:inner
+	AddBlockInfoToMap(135, 1, 172, 20, 3);// state:inner
+	AddBlockInfoToMap(135, 1, 172, 2, 7); // state:normal
+	// face z-		   	   	   
+	AddBlockInfoToMap(135, 2, 172, 5, 0); // state:outter
+	AddBlockInfoToMap(135, 2, 172, 8, 1); // state:outter
+	AddBlockInfoToMap(135, 2, 172, 18, 2);// state:inner
+	AddBlockInfoToMap(135, 2, 172, 21, 3);// state:inner
+	AddBlockInfoToMap(135, 2, 172, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(135, 3, 172, 6, 0); // state:outter
+	AddBlockInfoToMap(135, 3, 172, 7, 1); // state:outter
+	AddBlockInfoToMap(135, 3, 172, 19, 2);// state:inner
+	AddBlockInfoToMap(135, 3, 172, 20, 3);// state:inner
+	AddBlockInfoToMap(135, 3, 172, 3, 7); // state:normal
+
+	// jungle_stairs
+	// face x-
+	AddBlockInfoToMap(136, 0, 188, 5, 0); // state:outter 
+	AddBlockInfoToMap(136, 0, 188, 8, 1); // state:outter 
+	AddBlockInfoToMap(136, 0, 188, 18, 2);// state:inner
+	AddBlockInfoToMap(136, 0, 188, 21, 3);// state:inner
+	AddBlockInfoToMap(136, 0, 188, 1, 7); // state:normal
+	// face x+		   		   
+	AddBlockInfoToMap(136, 1, 188, 6, 0); // state:outter
+	AddBlockInfoToMap(136, 1, 188, 7, 1); // state:outter
+	AddBlockInfoToMap(136, 1, 188, 19, 2);// state:inner
+	AddBlockInfoToMap(136, 1, 188, 20, 3);// state:inner
+	AddBlockInfoToMap(136, 1, 188, 2, 7); // state:normal
+	// face z-		   	   	   
+	AddBlockInfoToMap(136, 2, 188, 5, 0); // state:outter
+	AddBlockInfoToMap(136, 2, 188, 8, 1); // state:outter
+	AddBlockInfoToMap(136, 2, 188, 18, 2);// state:inner
+	AddBlockInfoToMap(136, 2, 188, 21, 3);// state:inner
+	AddBlockInfoToMap(136, 2, 188, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(136, 3, 188, 6, 0); // state:outter
+	AddBlockInfoToMap(136, 3, 188, 7, 1); // state:outter
+	AddBlockInfoToMap(136, 3, 188, 19, 2);// state:inner
+	AddBlockInfoToMap(136, 3, 188, 20, 3);// state:inner
+	AddBlockInfoToMap(136, 3, 188, 3, 7); // state:normal
+
+	// command_block
+	AddBlockInfoToMap(137, 0, 212, 0);
+
+	// beacon (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(138, 0, 117, 0);
+
+	// cobblestone_wall
+	AddBlockInfoToMap(139, 0, 111, 1, 0);
+	AddBlockInfoToMap(139, 0, 111, 2, 1);
+	AddBlockInfoToMap(139, 0, 111, 4, 2);
+	AddBlockInfoToMap(139, 0, 111, 5, 3);
+	AddBlockInfoToMap(139, 0, 111, 3, 4);
+	AddBlockInfoToMap(139, 0, 111, 16, 5);
+	AddBlockInfoToMap(139, 0, 111, 6, 6);
+	AddBlockInfoToMap(139, 0, 111, 9, 7);
+	AddBlockInfoToMap(139, 0, 111, 7, 8);
+	AddBlockInfoToMap(139, 0, 111, 8, 9);
+	AddBlockInfoToMap(139, 0, 111, 17, 10);
+	AddBlockInfoToMap(139, 0, 111, 11, 11);
+	AddBlockInfoToMap(139, 0, 111, 13, 12);
+	AddBlockInfoToMap(139, 0, 111, 10, 13);
+	AddBlockInfoToMap(139, 0, 111, 12, 14);
+	AddBlockInfoToMap(139, 0, 111, 18, 15);
+
+	// flower_pot (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(140, 0, 117, 0);
+
+	// carrots (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(141, 0, 117, 0);
+
+	// potatoes (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(142, 0, 117, 0);
+
+	// wooden_button 
+	AddBlockInfoToMap(143, 0, 117, 0);
+
+	// skull (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(144, 0, 117, 0);
+
+	// anvil (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(145, 0, 117, 0);
+
+	// trapped_chest (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(146, 0, 117, 0);
+
+	// light_weighted_pressure_plate (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(147, 0, 117, 0);
+
+	// heavy_weighted_pressure_plate (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(148, 0, 117, 0);
+
+	// unpowered_comparator (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(149, 0, 117, 0);
+
+	// powered_comparator (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(150, 0, 117, 0);
+
+	// daylight_detector (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(151, 0, 117, 0);
+
+	// redstone_block
+	AddBlockInfoToMap(152, 0, 157, 0);
+
+	// quartz_ore
+	AddBlockInfoToMap(153, 0, 158, 0);
+
+	// hopper (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(154, 0, 117, 0);
+
+	// quartz_block
+	AddBlockInfoToMap(155, 0, 97, 0);
+
+	// quartz_stairs
+	AddBlockInfoToMap(156, 0, 187, 0);
+
+	// face x-
+	AddBlockInfoToMap(156, 0, 187, 5, 0); // state:outter 
+	AddBlockInfoToMap(156, 0, 187, 8, 1); // state:outter 
+	AddBlockInfoToMap(156, 0, 187, 18, 2);// state:inner
+	AddBlockInfoToMap(156, 0, 187, 21, 3);// state:inner
+	AddBlockInfoToMap(156, 0, 187, 1, 7); // state:normal
+	// face x+		   	   	   
+	AddBlockInfoToMap(156, 1, 187, 6, 0); // state:outter
+	AddBlockInfoToMap(156, 1, 187, 7, 1); // state:outter
+	AddBlockInfoToMap(156, 1, 187, 19, 2);// state:inner
+	AddBlockInfoToMap(156, 1, 187, 20, 3);// state:inner
+	AddBlockInfoToMap(156, 1, 187, 2, 7); // state:normal
+	// face z-		     	   
+	AddBlockInfoToMap(156, 2, 187, 5, 0); // state:outter
+	AddBlockInfoToMap(156, 2, 187, 8, 1); // state:outter
+	AddBlockInfoToMap(156, 2, 187, 18, 2);// state:inner
+	AddBlockInfoToMap(156, 2, 187, 21, 3);// state:inner
+	AddBlockInfoToMap(156, 2, 187, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(156, 3, 187, 6, 0); // state:outter
+	AddBlockInfoToMap(156, 3, 187, 7, 1); // state:outter
+	AddBlockInfoToMap(156, 3, 187, 19, 2);// state:inner
+	AddBlockInfoToMap(156, 3, 187, 20, 3);// state:inner
+	AddBlockInfoToMap(156, 3, 187, 3, 7); // state:normal
+
+	// activator_rail (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(157, 0, 117, 0);
+
+	// dropper (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(158, 0, 117, 0);
+
+	// stained_hardened_clay (can not find the replace block in paracraft)
+	/*
+	AddBlockInfoToMap(159, 0, 117, 0);
+	AddBlockInfoToMap(159, 1, 117, 0);
+	AddBlockInfoToMap(159, 2, 117, 0);
+	AddBlockInfoToMap(159, 3, 117, 0);
+	AddBlockInfoToMap(159, 4, 117, 0);
+	AddBlockInfoToMap(159, 5, 117, 0);
+	AddBlockInfoToMap(159, 6, 117, 0);
+	AddBlockInfoToMap(159, 7, 117, 0);
+	AddBlockInfoToMap(159, 8, 117, 0);
+	AddBlockInfoToMap(159, 9, 117, 0);
+	AddBlockInfoToMap(159, 10, 117, 0);
+	AddBlockInfoToMap(159, 11, 117, 0);
+	AddBlockInfoToMap(159, 12, 117, 0);
+	AddBlockInfoToMap(159, 13, 117, 0);
+	AddBlockInfoToMap(159, 14, 117, 0);
+	AddBlockInfoToMap(159, 15, 117, 0);
+	*/
+
+	// stained_glass_pan
+	//data:0-15, have 16 color glass plane
+	AddBlockInfoToMap(160, 0, 102, 11, 0);
+	AddBlockInfoToMap(160, 0, 102, 1, 1);
+	AddBlockInfoToMap(160, 0, 102, 1, 2);
+	AddBlockInfoToMap(160, 0, 102, 2, 3);
+	AddBlockInfoToMap(160, 0, 102, 2, 4);
+	AddBlockInfoToMap(160, 0, 102, 1, 5);
+	AddBlockInfoToMap(160, 0, 102, 3, 6);
+	AddBlockInfoToMap(160, 0, 102, 6, 7);
+	AddBlockInfoToMap(160, 0, 102, 4, 8);
+	AddBlockInfoToMap(160, 0, 102, 5, 9);
+	AddBlockInfoToMap(160, 0, 102, 2, 10);
+	AddBlockInfoToMap(160, 0, 102, 8, 11);
+	AddBlockInfoToMap(160, 0, 102, 10, 12);
+	AddBlockInfoToMap(160, 0, 102, 7, 13);
+	AddBlockInfoToMap(160, 0, 102, 9, 14);
+	AddBlockInfoToMap(160, 0, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 1, 102, 11, 0);
+	AddBlockInfoToMap(160, 1, 102, 1, 1);
+	AddBlockInfoToMap(160, 1, 102, 1, 2);
+	AddBlockInfoToMap(160, 1, 102, 2, 3);
+	AddBlockInfoToMap(160, 1, 102, 2, 4);
+	AddBlockInfoToMap(160, 1, 102, 1, 5);
+	AddBlockInfoToMap(160, 1, 102, 3, 6);
+	AddBlockInfoToMap(160, 1, 102, 6, 7);
+	AddBlockInfoToMap(160, 1, 102, 4, 8);
+	AddBlockInfoToMap(160, 1, 102, 5, 9);
+	AddBlockInfoToMap(160, 1, 102, 2, 10);
+	AddBlockInfoToMap(160, 1, 102, 8, 11);
+	AddBlockInfoToMap(160, 1, 102, 10, 12);
+	AddBlockInfoToMap(160, 1, 102, 7, 13);
+	AddBlockInfoToMap(160, 1, 102, 9, 14);
+	AddBlockInfoToMap(160, 1, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 2, 102, 11, 0);
+	AddBlockInfoToMap(160, 2, 102, 1, 1);
+	AddBlockInfoToMap(160, 2, 102, 1, 2);
+	AddBlockInfoToMap(160, 2, 102, 2, 3);
+	AddBlockInfoToMap(160, 2, 102, 2, 4);
+	AddBlockInfoToMap(160, 2, 102, 1, 5);
+	AddBlockInfoToMap(160, 2, 102, 3, 6);
+	AddBlockInfoToMap(160, 2, 102, 6, 7);
+	AddBlockInfoToMap(160, 2, 102, 4, 8);
+	AddBlockInfoToMap(160, 2, 102, 5, 9);
+	AddBlockInfoToMap(160, 2, 102, 2, 10);
+	AddBlockInfoToMap(160, 2, 102, 8, 11);
+	AddBlockInfoToMap(160, 2, 102, 10, 12);
+	AddBlockInfoToMap(160, 2, 102, 7, 13);
+	AddBlockInfoToMap(160, 2, 102, 9, 14);
+	AddBlockInfoToMap(160, 2, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 3, 102, 11, 0);
+	AddBlockInfoToMap(160, 3, 102, 1, 1);
+	AddBlockInfoToMap(160, 3, 102, 1, 2);
+	AddBlockInfoToMap(160, 3, 102, 2, 3);
+	AddBlockInfoToMap(160, 3, 102, 2, 4);
+	AddBlockInfoToMap(160, 3, 102, 1, 5);
+	AddBlockInfoToMap(160, 3, 102, 3, 6);
+	AddBlockInfoToMap(160, 3, 102, 6, 7);
+	AddBlockInfoToMap(160, 3, 102, 4, 8);
+	AddBlockInfoToMap(160, 3, 102, 5, 9);
+	AddBlockInfoToMap(160, 3, 102, 2, 10);
+	AddBlockInfoToMap(160, 3, 102, 8, 11);
+	AddBlockInfoToMap(160, 3, 102, 10, 12);
+	AddBlockInfoToMap(160, 3, 102, 7, 13);
+	AddBlockInfoToMap(160, 3, 102, 9, 14);
+	AddBlockInfoToMap(160, 3, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 4, 102, 11, 0);
+	AddBlockInfoToMap(160, 4, 102, 1, 1);
+	AddBlockInfoToMap(160, 4, 102, 1, 2);
+	AddBlockInfoToMap(160, 4, 102, 2, 3);
+	AddBlockInfoToMap(160, 4, 102, 2, 4);
+	AddBlockInfoToMap(160, 4, 102, 1, 5);
+	AddBlockInfoToMap(160, 4, 102, 3, 6);
+	AddBlockInfoToMap(160, 4, 102, 6, 7);
+	AddBlockInfoToMap(160, 4, 102, 4, 8);
+	AddBlockInfoToMap(160, 4, 102, 5, 9);
+	AddBlockInfoToMap(160, 4, 102, 2, 10);
+	AddBlockInfoToMap(160, 4, 102, 8, 11);
+	AddBlockInfoToMap(160, 4, 102, 10, 12);
+	AddBlockInfoToMap(160, 4, 102, 7, 13);
+	AddBlockInfoToMap(160, 4, 102, 9, 14);
+	AddBlockInfoToMap(160, 4, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 5, 102, 11, 0);
+	AddBlockInfoToMap(160, 5, 102, 1, 1);
+	AddBlockInfoToMap(160, 5, 102, 1, 2);
+	AddBlockInfoToMap(160, 5, 102, 2, 3);
+	AddBlockInfoToMap(160, 5, 102, 2, 4);
+	AddBlockInfoToMap(160, 5, 102, 1, 5);
+	AddBlockInfoToMap(160, 5, 102, 3, 6);
+	AddBlockInfoToMap(160, 5, 102, 6, 7);
+	AddBlockInfoToMap(160, 5, 102, 4, 8);
+	AddBlockInfoToMap(160, 5, 102, 5, 9);
+	AddBlockInfoToMap(160, 5, 102, 2, 10);
+	AddBlockInfoToMap(160, 5, 102, 8, 11);
+	AddBlockInfoToMap(160, 5, 102, 10, 12);
+	AddBlockInfoToMap(160, 5, 102, 7, 13);
+	AddBlockInfoToMap(160, 5, 102, 9, 14);
+	AddBlockInfoToMap(160, 5, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 6, 102, 11, 0);
+	AddBlockInfoToMap(160, 6, 102, 1, 1);
+	AddBlockInfoToMap(160, 6, 102, 1, 2);
+	AddBlockInfoToMap(160, 6, 102, 2, 3);
+	AddBlockInfoToMap(160, 6, 102, 2, 4);
+	AddBlockInfoToMap(160, 6, 102, 1, 5);
+	AddBlockInfoToMap(160, 6, 102, 3, 6);
+	AddBlockInfoToMap(160, 6, 102, 6, 7);
+	AddBlockInfoToMap(160, 6, 102, 4, 8);
+	AddBlockInfoToMap(160, 6, 102, 5, 9);
+	AddBlockInfoToMap(160, 6, 102, 2, 10);
+	AddBlockInfoToMap(160, 6, 102, 8, 11);
+	AddBlockInfoToMap(160, 6, 102, 10, 12);
+	AddBlockInfoToMap(160, 6, 102, 7, 13);
+	AddBlockInfoToMap(160, 6, 102, 9, 14);
+	AddBlockInfoToMap(160, 6, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 7, 102, 11, 0);
+	AddBlockInfoToMap(160, 7, 102, 1, 1);
+	AddBlockInfoToMap(160, 7, 102, 1, 2);
+	AddBlockInfoToMap(160, 7, 102, 2, 3);
+	AddBlockInfoToMap(160, 7, 102, 2, 4);
+	AddBlockInfoToMap(160, 7, 102, 1, 5);
+	AddBlockInfoToMap(160, 7, 102, 3, 6);
+	AddBlockInfoToMap(160, 7, 102, 6, 7);
+	AddBlockInfoToMap(160, 7, 102, 4, 8);
+	AddBlockInfoToMap(160, 7, 102, 5, 9);
+	AddBlockInfoToMap(160, 7, 102, 2, 10);
+	AddBlockInfoToMap(160, 7, 102, 8, 11);
+	AddBlockInfoToMap(160, 7, 102, 10, 12);
+	AddBlockInfoToMap(160, 7, 102, 7, 13);
+	AddBlockInfoToMap(160, 7, 102, 9, 14);
+	AddBlockInfoToMap(160, 7, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 8, 102, 11, 0);
+	AddBlockInfoToMap(160, 8, 102, 1, 1);
+	AddBlockInfoToMap(160, 8, 102, 1, 2);
+	AddBlockInfoToMap(160, 8, 102, 2, 3);
+	AddBlockInfoToMap(160, 8, 102, 2, 4);
+	AddBlockInfoToMap(160, 8, 102, 1, 5);
+	AddBlockInfoToMap(160, 8, 102, 3, 6);
+	AddBlockInfoToMap(160, 8, 102, 6, 7);
+	AddBlockInfoToMap(160, 8, 102, 4, 8);
+	AddBlockInfoToMap(160, 8, 102, 5, 9);
+	AddBlockInfoToMap(160, 8, 102, 2, 10);
+	AddBlockInfoToMap(160, 8, 102, 8, 11);
+	AddBlockInfoToMap(160, 8, 102, 10, 12);
+	AddBlockInfoToMap(160, 8, 102, 7, 13);
+	AddBlockInfoToMap(160, 8, 102, 9, 14);
+	AddBlockInfoToMap(160, 8, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 9, 102, 11, 0);
+	AddBlockInfoToMap(160, 9, 102, 1, 1);
+	AddBlockInfoToMap(160, 9, 102, 1, 2);
+	AddBlockInfoToMap(160, 9, 102, 2, 3);
+	AddBlockInfoToMap(160, 9, 102, 2, 4);
+	AddBlockInfoToMap(160, 9, 102, 1, 5);
+	AddBlockInfoToMap(160, 9, 102, 3, 6);
+	AddBlockInfoToMap(160, 9, 102, 6, 7);
+	AddBlockInfoToMap(160, 9, 102, 4, 8);
+	AddBlockInfoToMap(160, 9, 102, 5, 9);
+	AddBlockInfoToMap(160, 9, 102, 2, 10);
+	AddBlockInfoToMap(160, 9, 102, 8, 11);
+	AddBlockInfoToMap(160, 9, 102, 10, 12);
+	AddBlockInfoToMap(160, 9, 102, 7, 13);
+	AddBlockInfoToMap(160, 9, 102, 9, 14);
+	AddBlockInfoToMap(160, 9, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 10, 102, 11, 0);
+	AddBlockInfoToMap(160, 10, 102, 1, 1);
+	AddBlockInfoToMap(160, 10, 102, 1, 2);
+	AddBlockInfoToMap(160, 10, 102, 2, 3);
+	AddBlockInfoToMap(160, 10, 102, 2, 4);
+	AddBlockInfoToMap(160, 10, 102, 1, 5);
+	AddBlockInfoToMap(160, 10, 102, 3, 6);
+	AddBlockInfoToMap(160, 10, 102, 6, 7);
+	AddBlockInfoToMap(160, 10, 102, 4, 8);
+	AddBlockInfoToMap(160, 10, 102, 5, 9);
+	AddBlockInfoToMap(160, 10, 102, 2, 10);
+	AddBlockInfoToMap(160, 10, 102, 8, 11);
+	AddBlockInfoToMap(160, 10, 102, 10, 12);
+	AddBlockInfoToMap(160, 10, 102, 7, 13);
+	AddBlockInfoToMap(160, 10, 102, 9, 14);
+	AddBlockInfoToMap(160, 10, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 11, 102, 11, 0);
+	AddBlockInfoToMap(160, 11, 102, 1, 1);
+	AddBlockInfoToMap(160, 11, 102, 1, 2);
+	AddBlockInfoToMap(160, 11, 102, 2, 3);
+	AddBlockInfoToMap(160, 11, 102, 2, 4);
+	AddBlockInfoToMap(160, 11, 102, 1, 5);
+	AddBlockInfoToMap(160, 11, 102, 3, 6);
+	AddBlockInfoToMap(160, 11, 102, 6, 7);
+	AddBlockInfoToMap(160, 11, 102, 4, 8);
+	AddBlockInfoToMap(160, 11, 102, 5, 9);
+	AddBlockInfoToMap(160, 11, 102, 2, 10);
+	AddBlockInfoToMap(160, 11, 102, 8, 11);
+	AddBlockInfoToMap(160, 11, 102, 10, 12);
+	AddBlockInfoToMap(160, 11, 102, 7, 13);
+	AddBlockInfoToMap(160, 11, 102, 9, 14);
+	AddBlockInfoToMap(160, 11, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 12, 102, 11, 0);
+	AddBlockInfoToMap(160, 12, 102, 1, 1);
+	AddBlockInfoToMap(160, 12, 102, 1, 2);
+	AddBlockInfoToMap(160, 12, 102, 2, 3);
+	AddBlockInfoToMap(160, 12, 102, 2, 4);
+	AddBlockInfoToMap(160, 12, 102, 1, 5);
+	AddBlockInfoToMap(160, 12, 102, 3, 6);
+	AddBlockInfoToMap(160, 12, 102, 6, 7);
+	AddBlockInfoToMap(160, 12, 102, 4, 8);
+	AddBlockInfoToMap(160, 12, 102, 5, 9);
+	AddBlockInfoToMap(160, 12, 102, 2, 10);
+	AddBlockInfoToMap(160, 12, 102, 8, 11);
+	AddBlockInfoToMap(160, 12, 102, 10, 12);
+	AddBlockInfoToMap(160, 12, 102, 7, 13);
+	AddBlockInfoToMap(160, 12, 102, 9, 14);
+	AddBlockInfoToMap(160, 12, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 13, 102, 11, 0);
+	AddBlockInfoToMap(160, 13, 102, 1, 1);
+	AddBlockInfoToMap(160, 13, 102, 1, 2);
+	AddBlockInfoToMap(160, 13, 102, 2, 3);
+	AddBlockInfoToMap(160, 13, 102, 2, 4);
+	AddBlockInfoToMap(160, 13, 102, 1, 5);
+	AddBlockInfoToMap(160, 13, 102, 3, 6);
+	AddBlockInfoToMap(160, 13, 102, 6, 7);
+	AddBlockInfoToMap(160, 13, 102, 4, 8);
+	AddBlockInfoToMap(160, 13, 102, 5, 9);
+	AddBlockInfoToMap(160, 13, 102, 2, 10);
+	AddBlockInfoToMap(160, 13, 102, 8, 11);
+	AddBlockInfoToMap(160, 13, 102, 10, 12);
+	AddBlockInfoToMap(160, 13, 102, 7, 13);
+	AddBlockInfoToMap(160, 13, 102, 9, 14);
+	AddBlockInfoToMap(160, 13, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 14, 102, 11, 0);
+	AddBlockInfoToMap(160, 14, 102, 1, 1);
+	AddBlockInfoToMap(160, 14, 102, 1, 2);
+	AddBlockInfoToMap(160, 14, 102, 2, 3);
+	AddBlockInfoToMap(160, 14, 102, 2, 4);
+	AddBlockInfoToMap(160, 14, 102, 1, 5);
+	AddBlockInfoToMap(160, 14, 102, 3, 6);
+	AddBlockInfoToMap(160, 14, 102, 6, 7);
+	AddBlockInfoToMap(160, 14, 102, 4, 8);
+	AddBlockInfoToMap(160, 14, 102, 5, 9);
+	AddBlockInfoToMap(160, 14, 102, 2, 10);
+	AddBlockInfoToMap(160, 14, 102, 8, 11);
+	AddBlockInfoToMap(160, 14, 102, 10, 12);
+	AddBlockInfoToMap(160, 14, 102, 7, 13);
+	AddBlockInfoToMap(160, 14, 102, 9, 14);
+	AddBlockInfoToMap(160, 14, 102, 11, 15);
+
+	AddBlockInfoToMap(160, 15, 102, 11, 0);
+	AddBlockInfoToMap(160, 15, 102, 1, 1);
+	AddBlockInfoToMap(160, 15, 102, 1, 2);
+	AddBlockInfoToMap(160, 15, 102, 2, 3);
+	AddBlockInfoToMap(160, 15, 102, 2, 4);
+	AddBlockInfoToMap(160, 15, 102, 1, 5);
+	AddBlockInfoToMap(160, 15, 102, 3, 6);
+	AddBlockInfoToMap(160, 15, 102, 6, 7);
+	AddBlockInfoToMap(160, 15, 102, 4, 8);
+	AddBlockInfoToMap(160, 15, 102, 5, 9);
+	AddBlockInfoToMap(160, 15, 102, 2, 10);
+	AddBlockInfoToMap(160, 15, 102, 8, 11);
+	AddBlockInfoToMap(160, 15, 102, 10, 12);
+	AddBlockInfoToMap(160, 15, 102, 7, 13);
+	AddBlockInfoToMap(160, 15, 102, 9, 14);
+	AddBlockInfoToMap(160, 15, 102, 11, 15);
+
+	// leaves2
+	AddBlockInfoToMap(161, 0, 129, 0);
+
+	// log2
+	AddBlockInfoToMap(162, 0, 140, 0);
+
+	// acacia_stairs
+	// face x-
+	AddBlockInfoToMap(163, 0, 172, 5, 0); // state:outter 
+	AddBlockInfoToMap(163, 0, 172, 8, 1); // state:outter 
+	AddBlockInfoToMap(163, 0, 172, 18, 2);// state:inner
+	AddBlockInfoToMap(163, 0, 172, 21, 3);// state:inner
+	AddBlockInfoToMap(163, 0, 172, 1, 7); // state:normal
+	// face x+		    	   
+	AddBlockInfoToMap(163, 1, 172, 6, 0); // state:outter
+	AddBlockInfoToMap(163, 1, 172, 7, 1); // state:outter
+	AddBlockInfoToMap(163, 1, 172, 19, 2);// state:inner
+	AddBlockInfoToMap(163, 1, 172, 20, 3);// state:inner
+	AddBlockInfoToMap(163, 1, 172, 2, 7); // state:normal
+	// face z-		     	   
+	AddBlockInfoToMap(163, 2, 172, 5, 0); // state:outter
+	AddBlockInfoToMap(163, 2, 172, 8, 1); // state:outter
+	AddBlockInfoToMap(163, 2, 172, 18, 2);// state:inner
+	AddBlockInfoToMap(163, 2, 172, 21, 3);// state:inner
+	AddBlockInfoToMap(163, 2, 172, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(163, 3, 172, 6, 0); // state:outter
+	AddBlockInfoToMap(163, 3, 172, 7, 1); // state:outter
+	AddBlockInfoToMap(163, 3, 172, 19, 2);// state:inner
+	AddBlockInfoToMap(163, 3, 172, 20, 3);// state:inner
+	AddBlockInfoToMap(163, 3, 172, 3, 7); // state:normal
+
+	// dark_oak_stairs
+	// face x-
+	AddBlockInfoToMap(164, 0, 188, 5, 0); // state:outter 
+	AddBlockInfoToMap(164, 0, 188, 8, 1); // state:outter 
+	AddBlockInfoToMap(164, 0, 188, 18, 2);// state:inner
+	AddBlockInfoToMap(164, 0, 188, 21, 3);// state:inner
+	AddBlockInfoToMap(164, 0, 188, 1, 7); // state:normal
+	// face x+		   	   
+	AddBlockInfoToMap(164, 1, 188, 6, 0); // state:outter
+	AddBlockInfoToMap(164, 1, 188, 7, 1); // state:outter
+	AddBlockInfoToMap(164, 1, 188, 19, 2);// state:inner
+	AddBlockInfoToMap(164, 1, 188, 20, 3);// state:inner
+	AddBlockInfoToMap(164, 1, 188, 2, 7); // state:normal
+	// face z-		    	   
+	AddBlockInfoToMap(164, 2, 188, 5, 0); // state:outter
+	AddBlockInfoToMap(164, 2, 188, 8, 1); // state:outter
+	AddBlockInfoToMap(164, 2, 188, 18, 2);// state:inner
+	AddBlockInfoToMap(164, 2, 188, 21, 3);// state:inner
+	AddBlockInfoToMap(164, 2, 188, 4, 7); // state:normal
+	// face z-		  		   
+	AddBlockInfoToMap(164, 3, 188, 6, 0); // state:outter
+	AddBlockInfoToMap(164, 3, 188, 7, 1); // state:outter
+	AddBlockInfoToMap(164, 3, 188, 19, 2);// state:inner
+	AddBlockInfoToMap(164, 3, 188, 20, 3);// state:inner
+	AddBlockInfoToMap(164, 3, 188, 3, 7); // state:normal
+
+	// slime (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(165, 0, 117, 0);
+
+	// barrier (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(166, 0, 117, 0);
+
+	// iron_trapdoor
+	AddBlockInfoToMap(167, 0, 117, 0);
+
+	// prismarine
+	AddBlockInfoToMap(168, 0, 148, 0);
+	AddBlockInfoToMap(168, 1, 148, 0);
+	AddBlockInfoToMap(168, 2, 148, 0);
+
+	// sea_lantern
+	AddBlockInfoToMap(169, 0, 6, 0);
+
+	// hay_block (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(170, 0, 117, 0);
+
+	// carpet
+	AddBlockInfoToMap(171, 0, 234, 0);
+	AddBlockInfoToMap(171, 1, 235, 0);
+	AddBlockInfoToMap(171, 2, 236, 0);
+	AddBlockInfoToMap(171, 3, 237, 0);
+	AddBlockInfoToMap(171, 4, 238, 0);
+	AddBlockInfoToMap(171, 5, 239, 0);
+	AddBlockInfoToMap(171, 6, 240, 0);
+	AddBlockInfoToMap(171, 7, 241, 0);
+	AddBlockInfoToMap(171, 8, 242, 0);
+	AddBlockInfoToMap(171, 9, 243, 0);
+	AddBlockInfoToMap(171, 10, 244, 0);
+	AddBlockInfoToMap(171, 11, 245, 0);
+	AddBlockInfoToMap(171, 12, 246, 0);
+	AddBlockInfoToMap(171, 13, 247, 0);
+	AddBlockInfoToMap(171, 14, 248, 0);
+	AddBlockInfoToMap(171, 15, 249, 0);
+
+	// hardened_clay
+	AddBlockInfoToMap(172, 0, 53, 0);
+
+	// coal_block
+	AddBlockInfoToMap(173, 0, 71, 0);
+
+	// packed_ice
+	AddBlockInfoToMap(174, 0, 17, 0);
+
+	// large_flowers
+	AddBlockInfoToMap(175, 0, 116, 0);
+	AddBlockInfoToMap(175, 1, 115, 0);
+	AddBlockInfoToMap(175, 2, 113, 0);
+	AddBlockInfoToMap(175, 3, 114, 0);
+	AddBlockInfoToMap(175, 4, 115, 0);
+	AddBlockInfoToMap(175, 5, 115, 0);
+
+	// standing_banner (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(176, 0, 117, 0);
+
+	// wall_banner (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(177, 0, 117, 0);
+
+	// daylight_detector_inverted (can not find the replace block in paracraft)
+	//AddBlockInfoToMap(178, 0, 117, 0);
+
+	// red_sandstone
+	AddBlockInfoToMap(179, 0, 12, 0);
+	AddBlockInfoToMap(179, 1, 12, 0);
+	AddBlockInfoToMap(179, 2, 12, 0);
+
+	// red_sandstone_stairs 
+	// face x-
+	AddBlockInfoToMap(180, 0, 188, 5, 0); // state:outter 
+	AddBlockInfoToMap(180, 0, 188, 8, 1); // state:outter 
+	AddBlockInfoToMap(180, 0, 188, 18, 2);// state:inner
+	AddBlockInfoToMap(180, 0, 188, 21, 3);// state:inner
+	AddBlockInfoToMap(180, 0, 188, 1, 7); // state:normal
+	// face x+		   
+	AddBlockInfoToMap(180, 1, 188, 6, 0); // state:outter
+	AddBlockInfoToMap(180, 1, 188, 7, 1); // state:outter
+	AddBlockInfoToMap(180, 1, 188, 19, 2);// state:inner
+	AddBlockInfoToMap(180, 1, 188, 20, 3);// state:inner
+	AddBlockInfoToMap(180, 1, 188, 2, 7); // state:normal
+	// face z-		     
+	AddBlockInfoToMap(180, 2, 188, 5, 0); // state:outter
+	AddBlockInfoToMap(180, 2, 188, 8, 1); // state:outter
+	AddBlockInfoToMap(180, 2, 188, 18, 2);// state:inner
+	AddBlockInfoToMap(180, 2, 188, 21, 3);// state:inner
+	AddBlockInfoToMap(180, 2, 188, 4, 7); // state:normal
+	// face z-		  	   
+	AddBlockInfoToMap(180, 3, 188, 6, 0); // state:outter
+	AddBlockInfoToMap(180, 3, 188, 7, 1); // state:outter
+	AddBlockInfoToMap(180, 3, 188, 19, 2);// state:inner
+	AddBlockInfoToMap(180, 3, 188, 20, 3);// state:inner
+	AddBlockInfoToMap(180, 3, 188, 3, 7); // state:normal
+
+	// double_stone_slab2
+	AddBlockInfoToMap(181, 0, 23, 0);
+
+	// stone_slab2
+	AddBlockInfoToMap(182, 0, 181, 0);
+
+	// spruce_fence_gate
+	AddBlockInfoToMap(183, 0, 117, 0);
+
+	// birch_fence_gate
+	AddBlockInfoToMap(184, 0, 117, 0);
+
+	// jungle_fence_gate
+	AddBlockInfoToMap(185, 0, 117, 0);
+
+	// dark_oak_fence_gate
+	AddBlockInfoToMap(186, 0, 117, 0);
+
+	// acacia_fence_gate
+	AddBlockInfoToMap(187, 0, 117, 0);
+
+	// spruce_fence
+	AddBlockInfoToMap(188, 0, 101, 1, 0);
+	AddBlockInfoToMap(188, 0, 101, 2, 1);
+	AddBlockInfoToMap(188, 0, 101, 4, 2);
+	AddBlockInfoToMap(188, 0, 101, 5, 3);
+	AddBlockInfoToMap(188, 0, 101, 3, 4);
+	AddBlockInfoToMap(188, 0, 101, 14, 5);
+	AddBlockInfoToMap(188, 0, 101, 6, 6);
+	AddBlockInfoToMap(188, 0, 101, 9, 7);
+	AddBlockInfoToMap(188, 0, 101, 7, 8);
+	AddBlockInfoToMap(188, 0, 101, 8, 9);
+	AddBlockInfoToMap(188, 0, 101, 15, 10);
+	AddBlockInfoToMap(188, 0, 101, 11, 11);
+	AddBlockInfoToMap(188, 0, 101, 13, 12);
+	AddBlockInfoToMap(188, 0, 101, 10, 13);
+	AddBlockInfoToMap(188, 0, 101, 12, 14);
+	AddBlockInfoToMap(188, 0, 101, 16, 15);
+
+	// birch_fence
+	AddBlockInfoToMap(189, 0, 101, 1, 0);
+	AddBlockInfoToMap(189, 0, 101, 2, 1);
+	AddBlockInfoToMap(189, 0, 101, 4, 2);
+	AddBlockInfoToMap(189, 0, 101, 5, 3);
+	AddBlockInfoToMap(189, 0, 101, 3, 4);
+	AddBlockInfoToMap(189, 0, 101, 14, 5);
+	AddBlockInfoToMap(189, 0, 101, 6, 6);
+	AddBlockInfoToMap(189, 0, 101, 9, 7);
+	AddBlockInfoToMap(189, 0, 101, 7, 8);
+	AddBlockInfoToMap(189, 0, 101, 8, 9);
+	AddBlockInfoToMap(189, 0, 101, 15, 10);
+	AddBlockInfoToMap(189, 0, 101, 11, 11);
+	AddBlockInfoToMap(189, 0, 101, 13, 12);
+	AddBlockInfoToMap(189, 0, 101, 10, 13);
+	AddBlockInfoToMap(189, 0, 101, 12, 14);
+	AddBlockInfoToMap(189, 0, 101, 16, 15);
+
+	// jungle_fence
+	AddBlockInfoToMap(190, 0, 101, 1, 0);
+	AddBlockInfoToMap(190, 0, 101, 2, 1);
+	AddBlockInfoToMap(190, 0, 101, 4, 2);
+	AddBlockInfoToMap(190, 0, 101, 5, 3);
+	AddBlockInfoToMap(190, 0, 101, 3, 4);
+	AddBlockInfoToMap(190, 0, 101, 14, 5);
+	AddBlockInfoToMap(190, 0, 101, 6, 6);
+	AddBlockInfoToMap(190, 0, 101, 9, 7);
+	AddBlockInfoToMap(190, 0, 101, 7, 8);
+	AddBlockInfoToMap(190, 0, 101, 8, 9);
+	AddBlockInfoToMap(190, 0, 101, 15, 10);
+	AddBlockInfoToMap(190, 0, 101, 11, 11);
+	AddBlockInfoToMap(190, 0, 101, 13, 12);
+	AddBlockInfoToMap(190, 0, 101, 10, 13);
+	AddBlockInfoToMap(190, 0, 101, 12, 14);
+	AddBlockInfoToMap(190, 0, 101, 16, 15);
+
+	// dark_oak_fence
+	AddBlockInfoToMap(191, 0, 214, 1, 0);
+	AddBlockInfoToMap(191, 0, 214, 2, 1);
+	AddBlockInfoToMap(191, 0, 214, 4, 2);
+	AddBlockInfoToMap(191, 0, 214, 5, 3);
+	AddBlockInfoToMap(191, 0, 214, 3, 4);
+	AddBlockInfoToMap(191, 0, 214, 14, 5);
+	AddBlockInfoToMap(191, 0, 214, 6, 6);
+	AddBlockInfoToMap(191, 0, 214, 9, 7);
+	AddBlockInfoToMap(191, 0, 214, 7, 8);
+	AddBlockInfoToMap(191, 0, 214, 8, 9);
+	AddBlockInfoToMap(191, 0, 214, 15, 10);
+	AddBlockInfoToMap(191, 0, 214, 11, 11);
+	AddBlockInfoToMap(191, 0, 214, 13, 12);
+	AddBlockInfoToMap(191, 0, 214, 10, 13);
+	AddBlockInfoToMap(191, 0, 214, 12, 14);
+	AddBlockInfoToMap(191, 0, 214, 16, 15);
+
+	// acacia_fence
+	AddBlockInfoToMap(192, 0, 101, 1, 0);
+	AddBlockInfoToMap(192, 0, 101, 2, 1);
+	AddBlockInfoToMap(192, 0, 101, 4, 2);
+	AddBlockInfoToMap(192, 0, 101, 5, 3);
+	AddBlockInfoToMap(192, 0, 101, 3, 4);
+	AddBlockInfoToMap(192, 0, 101, 14, 5);
+	AddBlockInfoToMap(192, 0, 101, 6, 6);
+	AddBlockInfoToMap(192, 0, 101, 9, 7);
+	AddBlockInfoToMap(192, 0, 101, 7, 8);
+	AddBlockInfoToMap(192, 0, 101, 8, 9);
+	AddBlockInfoToMap(192, 0, 101, 15, 10);
+	AddBlockInfoToMap(192, 0, 101, 11, 11);
+	AddBlockInfoToMap(192, 0, 101, 13, 12);
+	AddBlockInfoToMap(192, 0, 101, 10, 13);
+	AddBlockInfoToMap(192, 0, 101, 12, 14);
+	AddBlockInfoToMap(192, 0, 101, 16, 15);
+
+	// spruce_door
+	AddBlockInfoToMap(193, 0, 117, 0);
+
+	// birch_door
+	AddBlockInfoToMap(194, 0, 117, 0);
+
+	// jungle_door
+	AddBlockInfoToMap(195, 0, 117, 0);
+
+	// acacia_door
+	AddBlockInfoToMap(196, 0, 117, 0);
+
+	// dark_oak_door
+	AddBlockInfoToMap(197, 0, 117, 0);
 
 }
 
@@ -607,4 +1725,3 @@ bool MCBlock::TranslateMCBlock(uint16_t &block_id, uint16_t &block_data, uint16_
 	block_side = 0;
 	return false;
 }
-
