@@ -322,26 +322,26 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(53, 1, 112, 2, 7); // state:normal
 	// face z-
 	AddBlockInfoToMap(53, 2, 112, 5, 0); // state:outter
-	AddBlockInfoToMap(53, 2, 112, 8, 1); // state:outter
+	AddBlockInfoToMap(53, 2, 112, 6, 1); // state:outter
 	AddBlockInfoToMap(53, 2, 112, 18, 2);// state:inner
-	AddBlockInfoToMap(53, 2, 112, 21, 3);// state:inner
-	AddBlockInfoToMap(53, 2, 112, 4, 7); // state:normal
-	// face z-
+	AddBlockInfoToMap(53, 2, 112, 19, 3);// state:inner
+	AddBlockInfoToMap(53, 2, 112, 3, 7); // state:normal
+	// face z+
 	AddBlockInfoToMap(53, 3, 112, 6, 0); // state:outter
 	AddBlockInfoToMap(53, 3, 112, 7, 1); // state:outter
 	AddBlockInfoToMap(53, 3, 112, 19, 2);// state:inner
 	AddBlockInfoToMap(53, 3, 112, 20, 3);// state:inner
-	AddBlockInfoToMap(53, 3, 112, 3, 7); // state:normal
+	AddBlockInfoToMap(53, 3, 112, 4, 7); // state:normal
 
 	// chest
 	// face z-
-	AddBlockInfoToMap(54, 2, 176, 0, 0, 2);
+	AddBlockInfoToMap(54, 2, 215, 0, 0, 2);
 	// face z+
-	AddBlockInfoToMap(54, 3, 176, 0, 0, 3);
+	AddBlockInfoToMap(54, 3, 215, 0, 0, 3);
 	// face x-
-	AddBlockInfoToMap(54, 4, 176, 0, 0, 0);
+	AddBlockInfoToMap(54, 4, 215, 0, 0, 0);
 	// face x+
-	AddBlockInfoToMap(54, 5, 176, 0, 0, 1);
+	AddBlockInfoToMap(54, 5, 215, 0, 0, 1);
 
 	// redstone_wire (can find this block in version 1.8.8 mc)
 	//AddBlockInfoToMap(55, 0, 189, 0);
@@ -356,14 +356,14 @@ void MCBlock::InitTranslateMap()
 	//AddBlockInfoToMap(58, 0, 176, 0);
 
 	// wheat
-	AddBlockInfoToMap(59, 0, 176, 3);
-	AddBlockInfoToMap(59, 1, 176, 3);
-	AddBlockInfoToMap(59, 2, 176, 2);
-	AddBlockInfoToMap(59, 3, 176, 2);
-	AddBlockInfoToMap(59, 4, 176, 1);
-	AddBlockInfoToMap(59, 5, 176, 1);
-	AddBlockInfoToMap(59, 6, 176, 0);
-	AddBlockInfoToMap(59, 7, 176, 0);
+	AddBlockInfoToMap(59, 0, 164, 3);
+	AddBlockInfoToMap(59, 1, 164, 3);
+	AddBlockInfoToMap(59, 2, 164, 2);
+	AddBlockInfoToMap(59, 3, 164, 2);
+	AddBlockInfoToMap(59, 4, 164, 1);
+	AddBlockInfoToMap(59, 5, 164, 1);
+	AddBlockInfoToMap(59, 6, 164, 0);
+	AddBlockInfoToMap(59, 7, 164, 0);
 
 	// farmland
 	AddBlockInfoToMap(60, 0, 13, 0); //dry
@@ -401,9 +401,9 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(63, 15, 211, 2);	// south - southeast
 
 	// wooden_door  (not complete)
-	AddBlockInfoToMap(64, 0, 176, 0);  //facing:;hinge:;half:;open/powered:;
-	AddBlockInfoToMap(64, 1, 176, 0);  //facing:z-;hinge:left;half:lower;open/powered:off;
-	AddBlockInfoToMap(64, 8, 176, 0);  //facing:z-;hinge:left;half:upper;open/powered:off;
+	AddBlockInfoToMap(64, 0, 0, 0);  //facing:;hinge:;half:;open/powered:;
+	AddBlockInfoToMap(64, 1, 0, 0);  //facing:z-;hinge:left;half:lower;open/powered:off;
+	AddBlockInfoToMap(64, 8, 0, 0);  //facing:z-;hinge:left;half:upper;open/powered:off;
 
 	// ladder
 	AddBlockInfoToMap(65, 2, 166, 5); //facing:z-
@@ -434,9 +434,9 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(67, 1, 175, 2, 7); // state:normal
 	// face z-		  		 
 	AddBlockInfoToMap(67, 2, 175, 5, 0); // state:outter
-	AddBlockInfoToMap(67, 2, 175, 8, 1); // state:outter
+	AddBlockInfoToMap(67, 2, 175, 6, 1); // state:outter
 	AddBlockInfoToMap(67, 2, 175, 18, 2);// state:inner
-	AddBlockInfoToMap(67, 2, 175, 21, 3);// state:inner
+	AddBlockInfoToMap(67, 2, 175, 19, 3);// state:inner
 	AddBlockInfoToMap(67, 2, 175, 4, 7); // state:normal
 	// face z-		  		 
 	AddBlockInfoToMap(67, 3, 175, 6, 0); // state:outter
@@ -446,10 +446,10 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(67, 3, 175, 3, 7); // state:normal
 
 	// wall_sign
-	AddBlockInfoToMap(68, 2, 176, 3); //facing:z-
-	AddBlockInfoToMap(68, 3, 176, 2); //facing:z+
-	AddBlockInfoToMap(68, 4, 176, 1); //facing:x-
-	AddBlockInfoToMap(68, 5, 176, 0); //facing:x+
+	AddBlockInfoToMap(68, 2, 211, 3); //facing:z-
+	AddBlockInfoToMap(68, 3, 211, 2); //facing:z+
+	AddBlockInfoToMap(68, 4, 211, 1); //facing:x-
+	AddBlockInfoToMap(68, 5, 211, 0); //facing:x+
 
 	// lever
 	AddBlockInfoToMap(69, 0, 190, 6); //facing:down;open:off;around:x
@@ -474,7 +474,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(70, 1, 200, 1);
 
 	// iron_door
-	AddBlockInfoToMap(71, 0, 176, 0);
+	AddBlockInfoToMap(71, 0, 0, 0);
 
 	// wooden_pressure_plate
 	AddBlockInfoToMap(72, 0, 201, 0);
@@ -501,12 +501,12 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(76, 5, 192, 5); //facing:up
 
 	// stone_button
-	AddBlockInfoToMap(77, 0, 176, 0); //facing:down
-	AddBlockInfoToMap(77, 1, 176, 0); //facing:x+
-	AddBlockInfoToMap(77, 2, 176, 0); //facing:x-
-	AddBlockInfoToMap(77, 3, 176, 0); //facing:z+
-	AddBlockInfoToMap(77, 4, 176, 0); //facing:z-
-	AddBlockInfoToMap(77, 5, 176, 0); //facing:up
+	AddBlockInfoToMap(77, 0, 0, 0); //facing:down
+	AddBlockInfoToMap(77, 1, 0, 0); //facing:x+
+	AddBlockInfoToMap(77, 2, 0, 0); //facing:x-
+	AddBlockInfoToMap(77, 3, 0, 0); //facing:z+
+	AddBlockInfoToMap(77, 4, 0, 0); //facing:z-
+	AddBlockInfoToMap(77, 5, 0, 0); //facing:up
 
 	// only translate block
 
@@ -521,7 +521,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(78, 7, 5, 0);
 
 	// ice
-	AddBlockInfoToMap(79, 0, 176, 17);
+	AddBlockInfoToMap(79, 0, 17, 0);
 
 	// snow
 	AddBlockInfoToMap(80, 0, 161, 0);
@@ -578,10 +578,10 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(92, 0, 84, 0);
 
 	// unpowered_repeater
-	AddBlockInfoToMap(93, 0, 176, 0);
+	AddBlockInfoToMap(93, 0, 0, 0);
 
 	// powered_repeater
-	AddBlockInfoToMap(94, 0, 176, 0);
+	AddBlockInfoToMap(94, 0, 0, 0);
 
 	// stained_glass
 	AddBlockInfoToMap(95, 0, 95, 0);

@@ -94,6 +94,13 @@ int World::getRegionCount() const {
 	return available_regions.size();
 }
 
+void World::GetOriginalRegionPos(int *originalRegionX, int *originalRegionZ)
+{
+	auto regionPos = available_regions.begin();
+	*originalRegionX = regionPos->x;
+	*originalRegionZ = regionPos->z;
+}
+
 bool World::hasRegion(const RegionPos& pos) const {
 	return available_regions.count(pos) != 0;
 }

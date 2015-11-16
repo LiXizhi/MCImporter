@@ -68,6 +68,8 @@ public:
 
 	bool getRegion(const RegionPos& pos, RegionFile& region) const;
 
+	void GetOriginalRegionPos(int *originalRegionX, int *originalRegionZ);
+
 };
 
 }

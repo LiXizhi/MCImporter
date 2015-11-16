@@ -12,6 +12,8 @@ using namespace ParaEngine;
 
 #define TEMP_MCR_FILENAME "temp/mcimporter.mcr.tmp"
 
+#define MCIMPORTER_DEBUGER true
+
 #pragma region PE_DLL 
 
 #ifdef WIN32
@@ -31,7 +33,9 @@ extern "C" {
 	CORE_EXPORT_DECL void LibInit();
 	CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid);
 	CORE_EXPORT_DECL bool LoadMCWorld(const std::string& sFolderName);
-	CORE_EXPORT_DECL bool GetRegionBlocks(int x, int z, std::vector<int> *blocks);
+	CORE_EXPORT_DECL bool GetRegionBlocks(int regionX, int regionZ, std::vector<int> *blocks);
+	CORE_EXPORT_DECL bool GetChunkBlocks(int chunkX, int chunkZ, std::vector<int> *blocks);
+	CORE_EXPORT_DECL void GetRegionOffset(int &offsetRegionX, int &offsetRegionZ);
 #ifdef __cplusplus
 }   /* extern "C" */
 #endif
@@ -220,6 +224,33 @@ bool MCImporter::isOccludedBlock( const mc::BlockPos& pos, mc::Chunk* chunk, uin
 	return true;
 }
 
+void MCImporter::initOffsetRegionPos()
+{
+	int originalParaCraftRegionX = 37;
+	int originalParaCraftRegionZ = 37;
+	int originalMCRegionX = 0;
+	int originalMCRegionZ = 0;
+	m_world.GetOriginalRegionPos(&originalMCRegionX, &originalMCRegionZ);
+	offsetRegionX = originalMCRegionX - originalParaCraftRegionX;
+	offsetRegionZ = originalMCRegionZ - originalParaCraftRegionZ;
+	/*offsetRegionX = -38;
+	offsetRegionZ = -39;*/
+}
+
+void MCImporter::TranslateParacraftChunkPos(int &chunkX, int &chunkZ)
+{
+	int x = chunkX;
+	int localX = x % 32 < 0 ? x % 32 + 32 : x % 32;
+	int paracraftRegionX = x >> 5;
+	int mcRegionX = paracraftRegionX + offsetRegionX;
+	chunkX = mcRegionX * 32 + localX;
+	int z = chunkZ;
+	int localZ = z % 32 < 0 ? z % 32 + 32 : z % 32;
+	int paracraftRegionZ = z >> 5;
+	int mcRegionZ = paracraftRegionZ + offsetRegionZ;
+	chunkZ = mcRegionZ * 32 + localZ;
+}
+
 /*
 53(oak_stairs),67(stone_stairs),108(brick_stairs),109(stone_brick_stairs),114(nether_brick_stairs),128(sandstone_stairs),134(spruce_stairs),135(birch_stairs),
 136(jungle_stairs),156(quartz_stairs),163(acacia_stairs),164(dark_oak_stairs),180(red_sandstone_stairs)
@@ -333,10 +364,10 @@ uint8_t getFenceBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, ui
 	uint8_t state = 0;
 	//uint8_t data = getBlockData(pos);
 	// facing "x-"
-	bool hasSolidBlockInPositiveX = pobj->hasSolidBlock(PosType(pos.x + 1, pos.z, pos.y));
-	bool hasSolidBlockInNegativeX = pobj->hasSolidBlock(PosType(pos.x - 1, pos.z, pos.y));
-	bool hasSolidBlockInPositiveZ = pobj->hasSolidBlock(PosType(pos.x, pos.z + 1, pos.y));
-	bool hasSolidBlockInNegativeZ = pobj->hasSolidBlock(PosType(pos.x, pos.z - 1, pos.y));
+	bool hasSolidBlockInPositiveX = pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id) || pobj->hasSolidBlock(PosType(pos.x + 1, pos.z, pos.y));
+	bool hasSolidBlockInNegativeX = pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id) || pobj->hasSolidBlock(PosType(pos.x - 1, pos.z, pos.y));
+	bool hasSolidBlockInPositiveZ = pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id) || pobj->hasSolidBlock(PosType(pos.x, pos.z + 1, pos.y));
+	bool hasSolidBlockInNegativeZ = pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id) || pobj->hasSolidBlock(PosType(pos.x, pos.z - 1, pos.y));
 
 	if ((! hasSolidBlockInPositiveX) && (! hasSolidBlockInNegativeX) && (! hasSolidBlockInPositiveZ) && (! hasSolidBlockInNegativeZ))        
 	{
@@ -416,7 +447,7 @@ uint8_t getBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_
 	{
 		state = getStairsBlockState(pobj, pos, block_id, data);
 	}
-	else if (block_id == 85)
+	else if (block_id == 85 || block_id == 113 || block_id == 188 || block_id == 189 || block_id == 190 || block_id == 191 || block_id == 192)
 	{
 		state = getFenceBlockState(pobj, pos, block_id, data);
 	}
@@ -428,6 +459,12 @@ uint8_t getBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_
 	return state;
 }
 
+CORE_EXPORT_DECL void GetRegionOffset(int &offsetRegionX, int &offsetRegionZ)
+{
+	MCImporter& mc_importer = MCImporter::CreateGetSingleton();
+	offsetRegionX = mc_importer.offsetRegionX;
+	offsetRegionZ = mc_importer.offsetRegionZ;
+}
 
 bool LoadMCWorld(const std::string& sFolderName)
 {
@@ -438,6 +475,7 @@ bool LoadMCWorld(const std::string& sFolderName)
 		{
 			mc_importer.m_world_cache = std::unique_ptr<mc::WorldCache>(new mc::WorldCache(mc_importer.m_world));
 			//mc_importer.p_world_cache = new mc::WorldCache(mc_importer.m_world);
+			mc_importer.initOffsetRegionPos();
 			return true;
 		}
 		return false;
@@ -445,16 +483,14 @@ bool LoadMCWorld(const std::string& sFolderName)
 	return false;
 }
 
-bool GetRegionBlocks(int x, int z, std::vector<int> *blocks)
+bool GetRegionBlocks(int regionX, int regionZ, std::vector<int> *blocks)
 {
 	//LoadMCWorld("F:/game/Minecraft1.8.8/.minecraft/saves/test");
 	MCImporter& mc_importer = MCImporter::CreateGetSingleton();
 
-	double regionCount = (double)(mc_importer.m_world.getRegionCount());
-	auto regions = mc_importer.m_world.getAvailableRegions();
-	int count = 0;
-	int i = 0;
-	mc::RegionFile* region = mc_importer.m_world_cache->getRegion(mc::RegionPos(x,z));
+	int mcRegionX = regionX + mc_importer.offsetRegionX;
+	int mcRegionZ = regionZ + mc_importer.offsetRegionZ;
+	mc::RegionFile* region = mc_importer.m_world_cache->getRegion(mc::RegionPos(mcRegionX,mcRegionZ));
 	if (!region){
 		return false;
 	}
@@ -480,7 +516,7 @@ bool GetRegionBlocks(int x, int z, std::vector<int> *blocks)
 						mc::LocalBlockPos pos(x, z, y);
 						uint16_t block_id = mychunk->getBlockID(pos);
 						if (block_id != 0)
-						//if (block_id == 63)
+						//if (block_id == 53)
 						{
 							uint16_t block_data = mychunk->getBlockData(pos);
 							BlockPos gpos = pos.toGlobalPos(chuck_pos);
@@ -489,15 +525,18 @@ bool GetRegionBlocks(int x, int z, std::vector<int> *blocks)
 								block_state = getBlockState(mc_importer.m_world_cache, gpos, block_id, block_data);
 							else
 								block_state = getBlockState(mychunk, pos, block_id, block_data);
-							blocks->push_back(gpos.x);
+							/*blocks->push_back(gpos.x);
 							blocks->push_back(gpos.y);
-							blocks->push_back(gpos.z);
+							blocks->push_back(gpos.z);*/
+							blocks->push_back(x);
+							blocks->push_back(y);
+							blocks->push_back(z);
 							uint16_t block_side = 0;
-							/*if (!MCBlock::TranslateMCBlock(block_id, block_data,block_state,block_side))
+							if (!MCBlock::TranslateMCBlock(block_id, block_data,block_state,block_side))
 							{
 								char sMsg[130];
 								snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x,gpos.y,gpos.z,block_id,block_data,block_state);
-							}*/
+							}
 							blocks->push_back((int)block_id);
 							blocks->push_back((int)block_data);
 							blocks->push_back((int)block_side);
@@ -507,6 +546,65 @@ bool GetRegionBlocks(int x, int z, std::vector<int> *blocks)
 			}
 		}
 	}
+	return true;
+}
+
+bool GetChunkBlocks(int chunkX, int chunkZ, std::vector<int> *blocks)
+{
+	//LoadMCWorld("F:/game/Minecraft1.8.8/.minecraft/saves/test");
+	MCImporter& mc_importer = MCImporter::CreateGetSingleton();
+
+	uint16_t min_y = 0;
+	uint16_t max_y = 256;
+
+	int mcChunkX = chunkX;
+	int mcChunkZ = chunkZ;
+	mc_importer.TranslateParacraftChunkPos(mcChunkX,mcChunkZ);
+
+	const mc::ChunkPos chuck_pos(mcChunkX, mcChunkZ);
+	mc::Chunk* mychunk = mc_importer.m_world_cache->getChunk(chuck_pos);
+	if (mychunk)
+	{
+		for (int x = 0; x < 16; ++x)
+		{
+			for (int z = 0; z < 16; ++z)
+			{
+				for (int y = min_y; y < max_y; ++y)
+				{
+					mc::LocalBlockPos pos(x, z, y);
+					uint16_t block_id = mychunk->getBlockID(pos);
+					if (block_id != 0)
+					//if (block_id == 53)
+					{
+						uint16_t block_data = mychunk->getBlockData(pos);
+						BlockPos gpos = pos.toGlobalPos(chuck_pos);
+						uint16_t block_state = 0;
+						if (pos.beBorder())
+							block_state = getBlockState(mc_importer.m_world_cache, gpos, block_id, block_data);
+						else
+							block_state = getBlockState(mychunk, pos, block_id, block_data);
+						/*blocks->push_back(gpos.x);
+						blocks->push_back(gpos.y);
+						blocks->push_back(gpos.z);*/
+						blocks->push_back(x);
+						blocks->push_back(y);
+						blocks->push_back(z);
+						uint16_t block_side = 0;
+						if (!MCBlock::TranslateMCBlock(block_id, block_data, block_state, block_side))
+						{
+							char sMsg[130];
+							snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x, gpos.y, gpos.z, block_id, block_data, block_state);
+						}
+						blocks->push_back((int)block_id);
+						blocks->push_back((int)block_data);
+						blocks->push_back((int)block_side);
+					}
+				}
+			}
+		}
+	}
+	else
+		return false;
 	return true;
 }
 
@@ -564,74 +662,165 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 					int i=0;
 					for (auto itCur = regions.cbegin(); itCur != regions.cend(); itCur++)
 					{
-						NPLInterface::NPLObjectProxy region_table;
-						region_table["x"] = (double) (itCur->x);
-						region_table["z"] = (double) (itCur->z);
-						std::stringstream sIndexStream;
-						std::string sIndex; 
-						sIndexStream << i;
-						sIndexStream >> sIndex;
-						regions_table[sIndex] = region_table;
-
+						if (MCIMPORTER_DEBUGER)
 						{
-							file << "region";
-							file << ",";
-							file << itCur->x;
-							file << ",";
-							file << itCur->z;
-							file << ",";
-							file << 0;
-							file << "\n";
-						}
-						
+							NPLInterface::NPLObjectProxy region_table;
+							region_table["x"] = (double)(itCur->x);
+							region_table["z"] = (double)(itCur->z);
+							std::stringstream sIndexStream;
+							std::string sIndex;
+							sIndexStream << i;
+							sIndexStream >> sIndex;
+							regions_table[sIndex] = region_table;
 
-						mc::RegionFile* region = mc_importer.m_world_cache->getRegion(*itCur);
-						if(!region){
-							continue;
-						}
-						auto region_chunks = region->getContainingChunks();
-
-						// go through all chunks in the region
-						for (auto chunk_it = region_chunks.begin(); chunk_it != region_chunks.end(); ++chunk_it) 
-						{
-							const mc::ChunkPos& chuck_pos = *chunk_it;
-							mc::Chunk* mychunk = mc_importer.m_world_cache->getChunk(chuck_pos);
-							if(mychunk)
 							{
-								for(int x=0;x<16; ++x)
-								{
-									for(int z=0;z<16; ++z)
-									{
-										for(int y=min_y;y<max_y; ++y)
-										{
-											mc::LocalBlockPos pos(x,z,y);
-											uint16_t block_id = mychunk->getBlockID(pos);
-											uint16_t block_data = mychunk->getBlockData(pos);
-											if(block_data>0)
-												block_id = block_id*100+block_data;
+								file << "region";
+								file << ",";
+								file << itCur->x;
+								file << ",";
+								file << itCur->z;
+								file << ",";
+								file << 0;
+								file << ",";
+								file << 0;
+								file << ",";
+								file << 0;
+								file << "\n";
+							}
 
-											if(block_id!=0)
+
+							mc::RegionFile* region = mc_importer.m_world_cache->getRegion(*itCur);
+							if (!region){
+								continue;
+							}
+							auto region_chunks = region->getContainingChunks();
+
+							// go through all chunks in the region
+							for (auto chunk_it = region_chunks.begin(); chunk_it != region_chunks.end(); ++chunk_it)
+							{
+								const mc::ChunkPos& chuck_pos = *chunk_it;
+								mc::Chunk* mychunk = mc_importer.m_world_cache->getChunk(chuck_pos);
+								if (mychunk)
+								{
+									for (int x = 0; x < 16; ++x)
+									{
+										for (int z = 0; z < 16; ++z)
+										{
+											for (int y = min_y; y<max_y; ++y)
 											{
-												BlockPos gpos = pos.toGlobalPos(chuck_pos);
-												if( bExportOpaque || !mc_importer.isOccludedBlock(gpos, mychunk, block_id))
+												mc::LocalBlockPos pos(x, z, y);
+												uint16_t block_id = mychunk->getBlockID(pos);
+												if (block_id != 0)
 												{
-													file << gpos.x;
-													file << ",";
-													file << gpos.y;
-													file << ",";
-													file << gpos.z;
-													file << ",";
-													file << block_id;
-													file << "\n";
-													count++;
+													uint16_t block_data = mychunk->getBlockData(pos);
+													BlockPos gpos = pos.toGlobalPos(chuck_pos);
+													uint16_t block_state = 0;
+													if (pos.beBorder())
+														block_state = getBlockState(mc_importer.m_world_cache, gpos, block_id, block_data);
+													else
+														block_state = getBlockState(mychunk, pos, block_id, block_data);
+													uint16_t block_side = 0;
+													if (!MCBlock::TranslateMCBlock(block_id, block_data, block_state, block_side))
+													{
+														char sMsg[130];
+														snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x, gpos.y, gpos.z, block_id, block_data, block_state);
+													}
+													else
+													{
+														file << pos.x;
+														file << ",";
+														file << pos.y;
+														file << ",";
+														file << pos.z;
+														file << ",";
+														file << block_id;
+														file << ",";
+														file << block_data;
+														file << ",";
+														file << block_side;
+														file << "\n";
+														count++;
+													}
 												}
 											}
 										}
 									}
+									file.flush();
 								}
-								file.flush();
 							}
 						}
+						else
+						{
+							NPLInterface::NPLObjectProxy region_table;
+							region_table["x"] = (double)(itCur->x);
+							region_table["z"] = (double)(itCur->z);
+							std::stringstream sIndexStream;
+							std::string sIndex;
+							sIndexStream << i;
+							sIndexStream >> sIndex;
+							regions_table[sIndex] = region_table;
+
+							{
+								file << "region";
+								file << ",";
+								file << itCur->x;
+								file << ",";
+								file << itCur->z;
+								file << ",";
+								file << 0;
+								file << "\n";
+							}
+
+
+							mc::RegionFile* region = mc_importer.m_world_cache->getRegion(*itCur);
+							if (!region){
+								continue;
+							}
+							auto region_chunks = region->getContainingChunks();
+
+							// go through all chunks in the region
+							for (auto chunk_it = region_chunks.begin(); chunk_it != region_chunks.end(); ++chunk_it)
+							{
+								const mc::ChunkPos& chuck_pos = *chunk_it;
+								mc::Chunk* mychunk = mc_importer.m_world_cache->getChunk(chuck_pos);
+								if (mychunk)
+								{
+									for (int x = 0; x < 16; ++x)
+									{
+										for (int z = 0; z < 16; ++z)
+										{
+											for (int y = min_y; y<max_y; ++y)
+											{
+												mc::LocalBlockPos pos(x, z, y);
+												uint16_t block_id = mychunk->getBlockID(pos);
+												uint16_t block_data = mychunk->getBlockData(pos);
+												if (block_data>0)
+													block_id = block_id * 100 + block_data;
+
+												if (block_id != 0)
+												{
+													BlockPos gpos = pos.toGlobalPos(chuck_pos);
+													if (bExportOpaque || !mc_importer.isOccludedBlock(gpos, mychunk, block_id))
+													{
+														file << gpos.x;
+														file << ",";
+														file << gpos.y;
+														file << ",";
+														file << gpos.z;
+														file << ",";
+														file << block_id;
+														file << "\n";
+														count++;
+													}
+												}
+											}
+										}
+									}
+									file.flush();
+								}
+							}
+						}
+						
 					}
 					msg["regions"] = regions_table;
 					msg["filename"] = TEMP_MCR_FILENAME;
