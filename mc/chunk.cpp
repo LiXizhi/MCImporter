@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <cmath>
+#include "MCblock.h"
 
 namespace mapcrafter {
 namespace mc {
@@ -195,10 +196,27 @@ uint8_t Chunk::getBiomeAt(const LocalBlockPos& pos) const {
 	return biomes[z * 16 + x];
 }
 
+//MCBlock::IsSolidBlock
+
+bool Chunk::hasSolidBlock(const LocalBlockPos& pos) const
+{
+	uint16_t block_id = getBlockID(pos);
+	if (block_id > 0)
+	{
+		if (MCBlock::IsSolidBlock(block_id))
+			return true;
+	}
+	return false;
+}
+
 bool Chunk::hasBlock(const LocalBlockPos& pos, const uint16_t block_id, const uint8_t data, const uint8_t state) const
 {
 	bool hasBlock = true;
 	uint16_t real_block_id = getBlockID(pos);
+	if (block_id == 0 && real_block_id > 0)
+	{
+		return true;
+	}
 	if (real_block_id != block_id)
 		hasBlock = false;
 	if (data != 255)

@@ -19,6 +19,7 @@
 
 #include "mc/cache.h"
 #include <math.h>
+#include "MCblock.h"
 
 namespace mapcrafter {
 namespace mc {
@@ -139,6 +140,38 @@ bool WorldCache::hasBlock(BlockPos blockpos, uint16_t block_id, uint8_t data, ui
 				}
 			}
 		}
+	}
+	return false;
+}
+
+uint16_t WorldCache::getBlockID(BlockPos& blockpos){
+	ChunkPos chunkpos(blockpos);
+	RegionPos &regionpos = chunkpos.getRegion();
+	if (world.hasRegion(regionpos))
+	{
+		RegionFile* region = getRegion(regionpos);
+		if (region)
+		{
+			if (region->hasChunk(chunkpos))
+			{
+				Chunk* chunk = getChunk(chunkpos);
+				if (chunk)
+				{
+					return chunk->getBlockID(blockpos.toLocalPos());
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+bool WorldCache::hasSolidBlock(BlockPos& pos)
+{
+	uint16_t block_id = getBlockID(pos);
+	if (block_id > 0)
+	{
+		if (MCBlock::IsSolidBlock(block_id))
+			return true;
 	}
 	return false;
 }

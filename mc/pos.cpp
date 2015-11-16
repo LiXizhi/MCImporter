@@ -246,7 +246,7 @@ bool LocalBlockPos::operator<(const LocalBlockPos& other) const {
 
 bool LocalBlockPos::beBorder() const
 {
-	if (x == 15 || z == 15)
+	if (x == 0 || z == 0 || x == 15 || z == 15)
 		return true;
 	return false;
 }
