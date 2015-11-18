@@ -495,10 +495,10 @@ bool GetRegionBlocks(int regionX, int regionZ, std::vector<int> *blocks)
 		return false;
 	}
 
-	uint16_t min_y = 0;
-	uint16_t max_y = 256;
-
 	auto region_chunks = region->getContainingChunks();
+
+	uint16_t min_y = MCImporter::min_y;
+	uint16_t max_y = MCImporter::max_y;
 
 	// go through all chunks in the region
 	for (auto chunk_it = region_chunks.begin(); chunk_it != region_chunks.end(); ++chunk_it)
@@ -554,8 +554,8 @@ bool GetChunkBlocks(int chunkX, int chunkZ, std::vector<int> *blocks)
 	//LoadMCWorld("F:/game/Minecraft1.8.8/.minecraft/saves/test");
 	MCImporter& mc_importer = MCImporter::CreateGetSingleton();
 
-	uint16_t min_y = 0;
-	uint16_t max_y = 256;
+	uint16_t min_y = MCImporter::min_y;
+	uint16_t max_y = MCImporter::max_y;
 
 	int mcChunkX = chunkX;
 	int mcChunkZ = chunkZ;
@@ -569,35 +569,40 @@ bool GetChunkBlocks(int chunkX, int chunkZ, std::vector<int> *blocks)
 		{
 			for (int z = 0; z < 16; ++z)
 			{
-				for (int y = min_y; y < max_y; ++y)
+				for (int nSection = min_y / 16; nSection < (max_y / 16); ++nSection)
 				{
-					mc::LocalBlockPos pos(x, z, y);
-					uint16_t block_id = mychunk->getBlockID(pos);
-					if (block_id != 0)
-					//if (block_id == 53)
+					if(!mychunk->hasSection(nSection))
+						continue;
+					for (int dy = 0; dy < 16; ++dy)
 					{
-						uint16_t block_data = mychunk->getBlockData(pos);
-						BlockPos gpos = pos.toGlobalPos(chuck_pos);
-						uint16_t block_state = 0;
-						if (pos.beBorder())
-							block_state = getBlockState(mc_importer.m_world_cache, gpos, block_id, block_data);
-						else
-							block_state = getBlockState(mychunk, pos, block_id, block_data);
-						/*blocks->push_back(gpos.x);
-						blocks->push_back(gpos.y);
-						blocks->push_back(gpos.z);*/
-						blocks->push_back(x);
-						blocks->push_back(y);
-						blocks->push_back(z);
-						uint16_t block_side = 0;
-						if (!MCBlock::TranslateMCBlock(block_id, block_data, block_state, block_side))
+						int y = nSection * 16 + dy;
+						mc::LocalBlockPos pos(x, z, y);
+						uint16_t block_id = mychunk->getBlockID(pos);
+						if (block_id != 0)
 						{
-							char sMsg[130];
-							snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x, gpos.y, gpos.z, block_id, block_data, block_state);
+							uint16_t block_data = mychunk->getBlockData(pos);
+							BlockPos gpos = pos.toGlobalPos(chuck_pos);
+							uint16_t block_state = 0;
+							if (pos.beBorder())
+								block_state = getBlockState(mc_importer.m_world_cache, gpos, block_id, block_data);
+							else
+								block_state = getBlockState(mychunk, pos, block_id, block_data);
+							/*blocks->push_back(gpos.x);
+							blocks->push_back(gpos.y);
+							blocks->push_back(gpos.z);*/
+							blocks->push_back(x);
+							blocks->push_back(y);
+							blocks->push_back(z);
+							uint16_t block_side = 0;
+							if (!MCBlock::TranslateMCBlock(block_id, block_data, block_state, block_side))
+							{
+								char sMsg[130];
+								snprintf(sMsg, 100, "mc region x=%d,z=%d,block_x=%d,block_y=%d,block_z=%d,block_id=%d,block_data=%d,block_state=%d translate failed!;", x, z, gpos.x, gpos.y, gpos.z, block_id, block_data, block_state);
+							}
+							blocks->push_back((int)block_id);
+							blocks->push_back((int)block_data);
+							blocks->push_back((int)block_side);
 						}
-						blocks->push_back((int)block_id);
-						blocks->push_back((int)block_data);
-						blocks->push_back((int)block_side);
 					}
 				}
 			}
@@ -624,8 +629,8 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 		if(sCmd == "load")
 		{
 			const std::string& sFolder = tabMsg["folder"];
-			uint16_t min_y = 0;
-			uint16_t max_y = 256;
+			uint16_t min_y = MCImporter::min_y;
+			uint16_t max_y = MCImporter::max_y;
 			if(tabMsg["min_y"].GetType() == NPLInterface::NPLObjectBase::NPLObjectType_Number)
 			{
 				min_y = (uint16_t)((double)(tabMsg["min_y"]));
@@ -845,6 +850,70 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 				std::string output;
 				NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
 				pState->activate("script/apps/Aries/Creator/Game/Tasks/MCImporterTask.lua", output.c_str(), output.size());
+			}
+		}
+		else if (sCmd == "loadmcworld")
+		{
+			const std::string& sPath = tabMsg["path"];
+			if (LoadMCWorld(sPath))
+			{
+				pState->WriteLog("successfully loaded mc world:");
+				pState->WriteLog(sPath.c_str());
+				pState->WriteLog("\n");
+			}
+			else
+			{
+				pState->WriteLog("error: failed to load mc world:");
+				pState->WriteLog(sPath.c_str());
+				pState->WriteLog("\n");
+			}
+		}
+		else if (sCmd == "GetChunkBlocks")
+		{
+			std::vector<int> blocks;
+
+			int chunkX = (int)((double)tabMsg["x"]);
+			int chunkZ = (int)((double)tabMsg["z"]);
+			const std::string& sCallback = tabMsg["callback"];
+			if (GetChunkBlocks(chunkX, chunkZ, &blocks))
+			{
+				NPLInterface::NPLObjectProxy msg;
+				int32_t blockCount = 0;
+				NPLInterface::NPLObjectProxy xTable, yTable, zTable, templateTable, dataTable;
+				for (vector<int>::iterator iter = blocks.begin(); iter != blocks.end(); iter++)
+				{
+					blockCount++;
+					xTable[blockCount] = (double)(*iter++);
+					yTable[blockCount] = (double)(*iter++);
+					zTable[blockCount] = (double)(*iter++);
+					templateTable[blockCount] = (double)(*iter++);
+					dataTable[blockCount] = (double)(*iter++);
+				}
+				msg["chunk_x"] = (double)chunkX;
+				msg["chunk_z"] = (double)chunkZ;
+				msg["x"] = xTable;
+				msg["y"] = yTable;
+				msg["z"] = zTable;
+				msg["tempId"] = templateTable;
+				msg["data"] = dataTable;
+				msg["count"] = (double)blockCount;
+				
+				std::string output;
+				NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
+				pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
+
+				//pState->WriteLog("some blocks are loaded in the chunk\n");
+				//pState->WriteLog(output.c_str());
+			}
+			else
+			{
+				NPLInterface::NPLObjectProxy msg;
+				msg["chunk_x"] = (double)chunkX;
+				msg["chunk_z"] = (double)chunkZ;
+
+				std::string output;
+				NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
+				pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
 			}
 		}
 	}

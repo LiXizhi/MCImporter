@@ -1,6 +1,6 @@
-# Author: LiXizhi
+# Author: LiPeng, LiXizhi
 # Company: ParaEngine.com
-# Date: 2013.5.5
+# Date: 2015.11
 # Desc: minecraft real time file importer
 # Note: 
 
@@ -17,6 +17,8 @@ SET(MCImporter_SRCS
 	endian.h
 	util.h
 	util.cpp
+	stdafx.h
+	stdafx.cpp
 	MCImporter.def
 	readme.txt
 )

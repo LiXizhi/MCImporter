@@ -43,4 +43,7 @@ public:
 	int offsetRegionZ;
 	int offsetChunkX;
 	int offsetChunkZ;
+
+	static const uint16_t min_y = 0;
+	static const uint16_t max_y = 256;
 };
