@@ -39,6 +39,8 @@ public:
 	//mc::WorldCache* p_world_cache;
 	void initOffsetRegionPos();
 	void TranslateParacraftChunkPos(int &chunkX,int &chunkZ);
+	void TranslateMCChunkPos(int &chunkX, int &chunkZ);
+	void TranslateMCBlockPos(int &bx, int &bz);
 	int offsetRegionX;
 	int offsetRegionZ;
 	int offsetChunkX;

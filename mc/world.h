@@ -70,6 +70,8 @@ public:
 
 	void GetOriginalRegionPos(int *originalRegionX, int *originalRegionZ);
 
+	bool GetSpawnPosition(int &spawnX, int &spawnY, int &spawnZ);
+
 };
 
 }

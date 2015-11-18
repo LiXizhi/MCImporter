@@ -121,5 +121,36 @@ bool World::getRegion(const RegionPos& pos, RegionFile& region) const {
 	return true;
 }
 
+// Get the mc world spawn position
+bool World::GetSpawnPosition(int &spawnX, int &spawnY, int &spawnZ)
+{
+	std::string level_dat_dir = worldpath + "/level.dat";
+	if (!fs::exists(level_dat_dir)) {
+		std::cerr << "Error: level.dat file " << level_dat_dir << " does not exists!" << std::endl;
+		return false;
+	}
+	else {
+		nbt::NBTFile nbt;
+		nbt.readNBT(level_dat_dir.c_str());
+		nbt::TagCompound* data = nbt.findTag<nbt::TagCompound>("Data", nbt::TAG_COMPOUND);
+		if (data == NULL) {
+			std::cerr << "Warning: Corrupt level.dat (No data tag)!" << std::endl;
+			return false;
+		}
+
+		nbt::TagInt* xpos = data->findTag<nbt::TagInt>("SpawnX", nbt::TAG_INT);
+		nbt::TagInt* ypos = data->findTag<nbt::TagInt>("SpawnY", nbt::TAG_INT);
+		nbt::TagInt* zpos = data->findTag<nbt::TagInt>("SpawnZ", nbt::TAG_INT);
+		if (xpos && ypos && zpos)
+		{
+			spawnX = xpos->payload;
+			spawnY = ypos->payload;
+			spawnZ = zpos->payload;
+			return true;
+		}
+	}
+	return false;
+}
+
 }
 }

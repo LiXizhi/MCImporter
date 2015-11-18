@@ -36,6 +36,7 @@ extern "C" {
 	CORE_EXPORT_DECL bool GetRegionBlocks(int regionX, int regionZ, std::vector<int> *blocks);
 	CORE_EXPORT_DECL bool GetChunkBlocks(int chunkX, int chunkZ, std::vector<int> *blocks);
 	CORE_EXPORT_DECL void GetRegionOffset(int &offsetRegionX, int &offsetRegionZ);
+	CORE_EXPORT_DECL bool GetSpawnPosition(int &spawnX, int &spawnY, int &spawnZ);
 #ifdef __cplusplus
 }   /* extern "C" */
 #endif
@@ -249,6 +250,57 @@ void MCImporter::TranslateParacraftChunkPos(int &chunkX, int &chunkZ)
 	int paracraftRegionZ = z >> 5;
 	int mcRegionZ = paracraftRegionZ + offsetRegionZ;
 	chunkZ = mcRegionZ * 32 + localZ;
+}
+
+void MCImporter::TranslateMCChunkPos(int &chunkX, int &chunkZ)
+{
+	/*int offsetRegionX = -39;
+	int offsetRegionZ = -38;*/
+	int x = chunkX;
+	int localX = x % 32 < 0 ? x % 32 + 32 : x % 32;
+	int MCRegionX = x >> 5;
+	int paracraftRegionX = MCRegionX - offsetRegionX;
+	chunkX = paracraftRegionX * 32 + localX;
+	int z = chunkZ;
+	int localZ = z % 32 < 0 ? z % 32 + 32 : z % 32;
+	int MCRegionZ = z >> 5;
+	int paracraftRegionZ = MCRegionZ - offsetRegionZ;
+	chunkZ = paracraftRegionZ * 32 + localZ;
+}
+
+void MCImporter::TranslateMCBlockPos(int &bx, int &bz)
+{
+	int local_x = bx % 16;
+	local_x = local_x < 0 ? local_x + 16 : local_x;
+	int local_z = bz % 16;
+	local_z = local_z < 0 ? local_z + 16 : local_z;
+
+	/*int x = bx;
+	int z = bz;*/
+	int ChunkX, ChunkZ;
+	if (bx < 0)
+		ChunkX = (bx - 15) / 16;
+	else
+		ChunkX = bx >> 4;
+	if (bz < 0)
+		ChunkZ = (bz - 15) / 16;
+	else
+		ChunkZ = bz >> 4;
+	TranslateMCChunkPos(ChunkX, ChunkZ);
+
+	bx = ChunkX * 16 + local_x;
+	bz = ChunkZ * 16 + local_z;
+}
+
+bool GetSpawnPosition(int &spawnX, int &spawnY, int &spawnZ)
+{
+	MCImporter& mc_importer = MCImporter::CreateGetSingleton();
+	if (mc_importer.m_world.GetSpawnPosition(spawnX, spawnY, spawnZ))
+	{
+		mc_importer.TranslateMCBlockPos(spawnX, spawnZ);
+		return true;
+	}
+	return false;
 }
 
 /*
