@@ -51,6 +51,8 @@ class World {
 private:
 	int rotation;
 
+	std::string worldpath;
+
 	std::unordered_set<RegionPos, hash_function> available_regions;
 	std::unordered_map<RegionPos, std::string, hash_function> region_files;
 
