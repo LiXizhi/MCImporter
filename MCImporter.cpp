@@ -304,31 +304,91 @@ bool GetSpawnPosition(int &spawnX, int &spawnY, int &spawnZ)
 }
 
 /*
+  ** face value and the corresponding coordinate direction and the corresponding block data:
+		0(x-)(data:0,4),1(x+)(data:1,5),2(z-)(data:2,6),3(z+)(data:3,7)
+  ** half value:
+		upward(0),downward(1)
+*/
+template<typename pObjectType, typename PosType>
+bool HasStairsBlock(pObjectType& pobj, PosType pos, uint8_t face, uint8_t half)
+{
+	uint8_t data;
+	if (half == 0)
+	{
+		if (face == 0)
+		{
+			data = 0;
+		}
+		else if (face == 1)
+		{
+			data = 1;
+		}
+		else if (face == 2)
+		{
+			data = 2;
+		}
+		else if (face == 3)
+		{
+			data = 3;
+		}
+	}
+	else if (half == 1)
+	{
+		if (face == 0)
+		{
+			data = 4;
+		}
+		else if (face == 1)
+		{
+			data = 5;
+		}
+		else if (face == 2)
+		{
+			data = 6;
+		}
+		else if (face == 3)
+		{
+			data = 7;
+		}
+	}
+	uint16_t real_block_id = 0;
+	uint8_t real_data = 0;
+	uint8_t real_state = 0;
+	pobj->GetBlockInfo(pos, real_block_id, real_data, real_state);
+	if (MCBlock::IsStairBlock(real_block_id))
+	{
+		if (data == real_data)
+			return true;
+	}
+	return false;
+}
+
+/*
 53(oak_stairs),67(stone_stairs),108(brick_stairs),109(stone_brick_stairs),114(nether_brick_stairs),128(sandstone_stairs),134(spruce_stairs),135(birch_stairs),
 136(jungle_stairs),156(quartz_stairs),163(acacia_stairs),164(dark_oak_stairs),180(red_sandstone_stairs)
 */
 template<typename pObjectType,typename PosType>
 uint8_t getStairsBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_t data)
 {
-	uint8_t state = 0;
-	//uint8_t data = getBlockData(pos);
-	// facing "x-"
-	if (data == 0)
-	{
+	uint8_t half = data < 4 ? 0: 1;
 
-		if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 2))        // state:outter 
+	uint8_t state = 0;
+	// facing "x-"
+	if (data == 0 || data == 4)
+	{
+		if (HasStairsBlock(pobj, PosType(pos.x + 1, pos.z, pos.y), 2, half))
 		{
 			state = 0;
 		}
-		else if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 3))   // state:outter 
+		else if (HasStairsBlock(pobj, PosType(pos.x + 1, pos.z, pos.y), 3, half))   // state:outter 
 		{
 			state = 1;
 		}
-		else if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 2))   // state:inner 
+		else if (HasStairsBlock(pobj,PosType(pos.x - 1, pos.z, pos.y), 2, half))   // state:inner 
 		{
 			state = 2;
 		}
-		else if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 3))   // state:inner
+		else if (HasStairsBlock(pobj,PosType(pos.x - 1, pos.z, pos.y), 3, half))   // state:inner
 		{
 			state = 3;
 		}
@@ -338,21 +398,21 @@ uint8_t getStairsBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, u
 	}
 
 	// facing "x+"
-	if (data == 1)
+	if (data == 1 || data == 5)
 	{
-		if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 2))   // state:outter 
+		if (HasStairsBlock(pobj, PosType(pos.x - 1, pos.z, pos.y), 2, half))   // state:outter 
 		{
 			state = 0;
 		}
-		else if (pobj->hasBlock(PosType(pos.x - 1, pos.z, pos.y), block_id, 3))   // state:outter
+		else if (HasStairsBlock(pobj, PosType(pos.x - 1, pos.z, pos.y), 3, half))   // state:outter
 		{
 			state = 1;
 		}
-		else if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 2))        // state:inner 
+		else if (HasStairsBlock(pobj, PosType(pos.x + 1, pos.z, pos.y), 2, half))        // state:inner 
 		{
 			state = 2;
 		}
-		else if (pobj->hasBlock(PosType(pos.x + 1, pos.z, pos.y), block_id, 3))   // state:inner 
+		else if (HasStairsBlock(pobj, PosType(pos.x + 1, pos.z, pos.y), 3, half))   // state:inner 
 		{
 			state = 3;
 		}
@@ -361,21 +421,21 @@ uint8_t getStairsBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, u
 	}
 
 	// facing "z-"
-	if (data == 2)
+	if (data == 2 || data == 6)
 	{
-		if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 0))        // state:outter 
+		if (HasStairsBlock(pobj, PosType(pos.x, pos.z + 1, pos.y), 0, half))        // state:outter 
 		{
 			state = 0;
 		}
-		else if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 1))   // state:outter 
+		else if (HasStairsBlock(pobj, PosType(pos.x, pos.z + 1, pos.y), 1, half))   // state:outter 
 		{
 			state = 1;
 		}
-		else if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 0))   // state:inner 
+		else if (HasStairsBlock(pobj, PosType(pos.x, pos.z - 1, pos.y), 0, half))   // state:inner 
 		{
 			state = 2;
 		}
-		else if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 1))   // state:inner
+		else if (HasStairsBlock(pobj, PosType(pos.x, pos.z - 1, pos.y), 1, half))   // state:inner
 		{
 			state = 3;
 		}
@@ -385,21 +445,21 @@ uint8_t getStairsBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, u
 	}
 
 	// facing "z+"
-	if (data == 3)
+	if (data == 3 || data == 7)
 	{
-		if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 0))   // state:outter 
+		if (HasStairsBlock(pobj, PosType(pos.x, pos.z - 1, pos.y), 0, half))   // state:outter 
 		{
 			state = 0;
 		}
-		else if (pobj->hasBlock(PosType(pos.x, pos.z - 1, pos.y), block_id, 1))   // state:outter
+		else if (HasStairsBlock(pobj, PosType(pos.x, pos.z - 1, pos.y), 1, half))   // state:outter
 		{
 			state = 1;
 		}
-		else if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 0))        // state:inner 
+		else if (HasStairsBlock(pobj, PosType(pos.x, pos.z + 1, pos.y), 0 ,half))        // state:inner 
 		{
 			state = 2;
 		}
-		else if (pobj->hasBlock(PosType(pos.x, pos.z + 1, pos.y), block_id, 1))   // state:inner 
+		else if (HasStairsBlock(pobj, PosType(pos.x, pos.z + 1, pos.y), 1, half))   // state:inner 
 		{
 			state = 3;
 		}
@@ -494,8 +554,7 @@ uint8_t getBlockState(pObjectType& pobj, PosType pos, uint16_t block_id, uint16_
 {
 	uint8_t state = 0;
 	//uint16_t block_id = getBlockID(pos);
-	if (block_id == 53 || block_id == 67 || block_id == 108 || block_id == 109 || block_id == 114 || block_id == 128 || block_id == 134 || block_id == 135 || block_id == 136 || block_id == 156
-		|| block_id == 163 || block_id == 164 || block_id == 180)
+	if (MCBlock::IsStairBlock(block_id))
 	{
 		state = getStairsBlockState(pobj, pos, block_id, data);
 	}

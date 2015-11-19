@@ -37,6 +37,61 @@ void MCBlock::AddBlockInfoToMap(uint16_t block_id, uint16_t data, uint16_t pe_bl
 	MCBlockMaps[block_tag] = info;
 }
 
+void MCBlock::AddStairBlockInfoToMap(uint16_t block_id, uint16_t pe_block_id)
+{
+	// stair block
+	//half:top
+	// face x-
+	AddBlockInfoToMap(block_id, 0, pe_block_id, 5, 0); // state:outter,corner face:z- 
+	AddBlockInfoToMap(block_id, 0, pe_block_id, 8, 1); // state:outter,corner face:z+ 
+	AddBlockInfoToMap(block_id, 0, pe_block_id, 18, 2);// state:inner	,corner face:z-
+	AddBlockInfoToMap(block_id, 0, pe_block_id, 21, 3);// state:inner	,corner face:z+
+	AddBlockInfoToMap(block_id, 0, pe_block_id, 1, 7); // state:normal
+	// face x+		 
+	AddBlockInfoToMap(block_id, 1, pe_block_id, 6, 0); // state:outter,corner face:z-
+	AddBlockInfoToMap(block_id, 1, pe_block_id, 7, 1); // state:outter,corner face:z+
+	AddBlockInfoToMap(block_id, 1, pe_block_id, 19, 2);// state:inner	,corner face:z-
+	AddBlockInfoToMap(block_id, 1, pe_block_id, 20, 3);// state:inner	,corner face:z+
+	AddBlockInfoToMap(block_id, 1, pe_block_id, 2, 7); // state:normal
+	// face z-		  
+	AddBlockInfoToMap(block_id, 2, pe_block_id, 5, 0); // state:outter,corner face:x-
+	AddBlockInfoToMap(block_id, 2, pe_block_id, 6, 1); // state:outter,corner face:x+
+	AddBlockInfoToMap(block_id, 2, pe_block_id, 18, 2);// state:inner	,corner face:x-
+	AddBlockInfoToMap(block_id, 2, pe_block_id, 19, 3);// state:inner	,corner face:x+
+	AddBlockInfoToMap(block_id, 2, pe_block_id, 3, 7); // state:normal
+	// face z+		
+	AddBlockInfoToMap(block_id, 3, pe_block_id, 6, 0); // state:outter,corner face:x-
+	AddBlockInfoToMap(block_id, 3, pe_block_id, 7, 1); // state:outter,corner face:x+
+	AddBlockInfoToMap(block_id, 3, pe_block_id, 19, 2);// state:inner	,corner face:x-
+	AddBlockInfoToMap(block_id, 3, pe_block_id, 20, 3);// state:inner	,corner face:x+
+	AddBlockInfoToMap(block_id, 3, pe_block_id, 4, 7); // state:normal
+	//half:bottom	  
+	// face x-		  
+	AddBlockInfoToMap(block_id, 4, pe_block_id, 14, 0); // state:outter,corner face:z- 
+	AddBlockInfoToMap(block_id, 4, pe_block_id, 17, 1); // state:outter,corner face:z+
+	AddBlockInfoToMap(block_id, 4, pe_block_id, 22, 2); // state:inner ,corner face:z-
+	AddBlockInfoToMap(block_id, 4, pe_block_id, 25, 3); // state:inner ,corner face:z+
+	AddBlockInfoToMap(block_id, 4, pe_block_id, 12, 7); // state:normal
+	// face x+		
+	AddBlockInfoToMap(block_id, 5, pe_block_id, 15, 0); // state:outter,corner face:z-
+	AddBlockInfoToMap(block_id, 5, pe_block_id, 16, 1); // state:outter,corner face:z+
+	AddBlockInfoToMap(block_id, 5, pe_block_id, 23, 2); // state:inner ,corner face:z-
+	AddBlockInfoToMap(block_id, 5, pe_block_id, 24, 3); // state:inner ,corner face:z+
+	AddBlockInfoToMap(block_id, 5, pe_block_id, 10, 7); // state:normal
+	// face z-		 
+	AddBlockInfoToMap(block_id, 6, pe_block_id, 14, 0);  // state:outter,corner face:x-
+	AddBlockInfoToMap(block_id, 6, pe_block_id, 15, 1);  // state:outter,corner face:x+
+	AddBlockInfoToMap(block_id, 6, pe_block_id, 22, 2);  // state:inner ,corner face:x-
+	AddBlockInfoToMap(block_id, 6, pe_block_id, 23, 3);  // state:inner ,corner face:x+
+	AddBlockInfoToMap(block_id, 6, pe_block_id, 11, 7);  // state:normal
+	// face z+		
+	AddBlockInfoToMap(block_id, 7, pe_block_id, 17, 0);  // state:outter,corner face:x-
+	AddBlockInfoToMap(block_id, 7, pe_block_id, 16, 1);  // state:outter,corner face:x+
+	AddBlockInfoToMap(block_id, 7, pe_block_id, 25, 2);  // state:inner ,corner face:x-
+	AddBlockInfoToMap(block_id, 7, pe_block_id, 24, 3);  // state:inner ,corner face:x+
+	AddBlockInfoToMap(block_id, 7, pe_block_id, 13, 7);  // state:normal
+}
+
 void MCBlock::InitTranslateMap()
 {
 	/*
@@ -308,30 +363,7 @@ void MCBlock::InitTranslateMap()
 	//AddBlockInfoToMap(52, 0, 0, 0);
 
 	// oak_stairs
-	// face x-
-	AddBlockInfoToMap(53, 0, 112, 5, 0); // state:outter 
-	AddBlockInfoToMap(53, 0, 112, 8, 1); // state:outter 
-	AddBlockInfoToMap(53, 0, 112, 18, 2);// state:inner
-	AddBlockInfoToMap(53, 0, 112, 21, 3);// state:inner
-	AddBlockInfoToMap(53, 0, 112, 1, 7); // state:normal
-	// face x+
-	AddBlockInfoToMap(53, 1, 112, 6, 0); // state:outter
-	AddBlockInfoToMap(53, 1, 112, 7, 1); // state:outter
-	AddBlockInfoToMap(53, 1, 112, 19, 2);// state:inner
-	AddBlockInfoToMap(53, 1, 112, 20, 3);// state:inner
-	AddBlockInfoToMap(53, 1, 112, 2, 7); // state:normal
-	// face z-
-	AddBlockInfoToMap(53, 2, 112, 5, 0); // state:outter
-	AddBlockInfoToMap(53, 2, 112, 6, 1); // state:outter
-	AddBlockInfoToMap(53, 2, 112, 18, 2);// state:inner
-	AddBlockInfoToMap(53, 2, 112, 19, 3);// state:inner
-	AddBlockInfoToMap(53, 2, 112, 3, 7); // state:normal
-	// face z+
-	AddBlockInfoToMap(53, 3, 112, 6, 0); // state:outter
-	AddBlockInfoToMap(53, 3, 112, 7, 1); // state:outter
-	AddBlockInfoToMap(53, 3, 112, 19, 2);// state:inner
-	AddBlockInfoToMap(53, 3, 112, 20, 3);// state:inner
-	AddBlockInfoToMap(53, 3, 112, 4, 7); // state:normal
+	AddStairBlockInfoToMap(53, 112);
 
 	// chest
 	// face z-
@@ -420,30 +452,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(66, 5, 103, 8);//from low to high and around z
 
 	// stone_stairs
-	// face x-
-	AddBlockInfoToMap(67, 0, 175, 5, 0); // state:outter 
-	AddBlockInfoToMap(67, 0, 175, 8, 1); // state:outter 
-	AddBlockInfoToMap(67, 0, 175, 18, 2);// state:inner
-	AddBlockInfoToMap(67, 0, 175, 21, 3);// state:inner
-	AddBlockInfoToMap(67, 0, 175, 1, 7); // state:normal
-	// face x+		  		 
-	AddBlockInfoToMap(67, 1, 175, 6, 0); // state:outter
-	AddBlockInfoToMap(67, 1, 175, 7, 1); // state:outter
-	AddBlockInfoToMap(67, 1, 175, 19, 2);// state:inner
-	AddBlockInfoToMap(67, 1, 175, 20, 3);// state:inner
-	AddBlockInfoToMap(67, 1, 175, 2, 7); // state:normal
-	// face z-		  		 
-	AddBlockInfoToMap(67, 2, 175, 5, 0); // state:outter
-	AddBlockInfoToMap(67, 2, 175, 6, 1); // state:outter
-	AddBlockInfoToMap(67, 2, 175, 18, 2);// state:inner
-	AddBlockInfoToMap(67, 2, 175, 19, 3);// state:inner
-	AddBlockInfoToMap(67, 2, 175, 4, 7); // state:normal
-	// face z-		  		 
-	AddBlockInfoToMap(67, 3, 175, 6, 0); // state:outter
-	AddBlockInfoToMap(67, 3, 175, 7, 1); // state:outter
-	AddBlockInfoToMap(67, 3, 175, 19, 2);// state:inner
-	AddBlockInfoToMap(67, 3, 175, 20, 3);// state:inner
-	AddBlockInfoToMap(67, 3, 175, 3, 7); // state:normal
+	AddStairBlockInfoToMap(67, 175);
 
 	// wall_sign
 	AddBlockInfoToMap(68, 2, 211, 3); //facing:z-
@@ -678,56 +687,10 @@ void MCBlock::InitTranslateMap()
 	//AddBlockInfoToMap(107, 0, 117, 0);
 
 	// brick_stairs
-	// face x-
-	AddBlockInfoToMap(108, 0, 167, 5, 0); // state:outter 
-	AddBlockInfoToMap(108, 0, 167, 8, 1); // state:outter 
-	AddBlockInfoToMap(108, 0, 167, 18, 2);// state:inner
-	AddBlockInfoToMap(108, 0, 167, 21, 3);// state:inner
-	AddBlockInfoToMap(108, 0, 167, 1, 7); // state:normal
-	// face x+		  		  
-	AddBlockInfoToMap(108, 1, 167, 6, 0); // state:outter
-	AddBlockInfoToMap(108, 1, 167, 7, 1); // state:outter
-	AddBlockInfoToMap(108, 1, 167, 19, 2);// state:inner
-	AddBlockInfoToMap(108, 1, 167, 20, 3);// state:inner
-	AddBlockInfoToMap(108, 1, 167, 2, 7); // state:normal
-	// face z-		  		  
-	AddBlockInfoToMap(108, 2, 167, 5, 0); // state:outter
-	AddBlockInfoToMap(108, 2, 167, 8, 1); // state:outter
-	AddBlockInfoToMap(108, 2, 167, 18, 2);// state:inner
-	AddBlockInfoToMap(108, 2, 167, 21, 3);// state:inner
-	AddBlockInfoToMap(108, 2, 167, 4, 7); // state:normal
-	// face z-		  		  
-	AddBlockInfoToMap(108, 3, 167, 6, 0); // state:outter
-	AddBlockInfoToMap(108, 3, 167, 7, 1); // state:outter
-	AddBlockInfoToMap(108, 3, 167, 19, 2);// state:inner
-	AddBlockInfoToMap(108, 3, 167, 20, 3);// state:inner
-	AddBlockInfoToMap(108, 3, 167, 3, 7); // state:normal
+	AddStairBlockInfoToMap(108, 167);
 
 	// stone_brick_stairs
-	// face x-
-	AddBlockInfoToMap(109, 0, 168, 5, 0); // state:outter 
-	AddBlockInfoToMap(109, 0, 168, 8, 1); // state:outter 
-	AddBlockInfoToMap(109, 0, 168, 18, 2);// state:inner
-	AddBlockInfoToMap(109, 0, 168, 21, 3);// state:inner
-	AddBlockInfoToMap(109, 0, 168, 1, 7); // state:normal
-	// face x+		  		  
-	AddBlockInfoToMap(109, 1, 168, 6, 0); // state:outter
-	AddBlockInfoToMap(109, 1, 168, 7, 1); // state:outter
-	AddBlockInfoToMap(109, 1, 168, 19, 2);// state:inner
-	AddBlockInfoToMap(109, 1, 168, 20, 3);// state:inner
-	AddBlockInfoToMap(109, 1, 168, 2, 7); // state:normal
-	// face z-		  		  
-	AddBlockInfoToMap(109, 2, 168, 5, 0); // state:outter
-	AddBlockInfoToMap(109, 2, 168, 8, 1); // state:outter
-	AddBlockInfoToMap(109, 2, 168, 18, 2);// state:inner
-	AddBlockInfoToMap(109, 2, 168, 21, 3);// state:inner
-	AddBlockInfoToMap(109, 2, 168, 4, 7); // state:normal
-	// face z-		  		  
-	AddBlockInfoToMap(109, 3, 168, 6, 0); // state:outter
-	AddBlockInfoToMap(109, 3, 168, 7, 1); // state:outter
-	AddBlockInfoToMap(109, 3, 168, 19, 2);// state:inner
-	AddBlockInfoToMap(109, 3, 168, 20, 3);// state:inner
-	AddBlockInfoToMap(109, 3, 168, 3, 7); // state:normal
+	AddStairBlockInfoToMap(109, 168);
 
 	// mycelium (can not find the replace block in paracraft)
 	//AddBlockInfoToMap(110, 0, 117, 0);
@@ -757,30 +720,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(113, 0, 101, 16, 15);
 
 	// nether_brick_stairs
-	// face x-
-	AddBlockInfoToMap(114, 0, 169, 5, 0); // state:outter 
-	AddBlockInfoToMap(114, 0, 169, 8, 1); // state:outter 
-	AddBlockInfoToMap(114, 0, 169, 18, 2);// state:inner
-	AddBlockInfoToMap(114, 0, 169, 21, 3);// state:inner
-	AddBlockInfoToMap(114, 0, 169, 1, 7); // state:normal
-	// face x+		    		
-	AddBlockInfoToMap(114, 1, 169, 6, 0); // state:outter
-	AddBlockInfoToMap(114, 1, 169, 7, 1); // state:outter
-	AddBlockInfoToMap(114, 1, 169, 19, 2);// state:inner
-	AddBlockInfoToMap(114, 1, 169, 20, 3);// state:inner
-	AddBlockInfoToMap(114, 1, 169, 2, 7); // state:normal
-	// face z-		    		
-	AddBlockInfoToMap(114, 2, 169, 5, 0); // state:outter
-	AddBlockInfoToMap(114, 2, 169, 8, 1); // state:outter
-	AddBlockInfoToMap(114, 2, 169, 18, 2);// state:inner
-	AddBlockInfoToMap(114, 2, 169, 21, 3);// state:inner
-	AddBlockInfoToMap(114, 2, 169, 4, 7); // state:normal
-	// face z-		    		
-	AddBlockInfoToMap(114, 3, 169, 6, 0); // state:outter
-	AddBlockInfoToMap(114, 3, 169, 7, 1); // state:outter
-	AddBlockInfoToMap(114, 3, 169, 19, 2);// state:inner
-	AddBlockInfoToMap(114, 3, 169, 20, 3);// state:inner
-	AddBlockInfoToMap(114, 3, 169, 3, 7); // state:normal
+	AddStairBlockInfoToMap(114, 169);
 
 	// nether_wart (can not find the replace block in paracraft)
 	//AddBlockInfoToMap(115, 0, 117, 0);
@@ -822,30 +762,7 @@ void MCBlock::InitTranslateMap()
 	//AddBlockInfoToMap(127, 0, 117, 0);
 
 	// sandstone_stairs
-	// face x-
-	AddBlockInfoToMap(128, 0, 104, 5, 0); // state:outter 
-	AddBlockInfoToMap(128, 0, 104, 8, 1); // state:outter 
-	AddBlockInfoToMap(128, 0, 104, 18, 2);// state:inner
-	AddBlockInfoToMap(128, 0, 104, 21, 3);// state:inner
-	AddBlockInfoToMap(128, 0, 104, 1, 7); // state:normal
-	// face x+		   		   
-	AddBlockInfoToMap(128, 1, 104, 6, 0); // state:outter
-	AddBlockInfoToMap(128, 1, 104, 7, 1); // state:outter
-	AddBlockInfoToMap(128, 1, 104, 19, 2);// state:inner
-	AddBlockInfoToMap(128, 1, 104, 20, 3);// state:inner
-	AddBlockInfoToMap(128, 1, 104, 2, 7); // state:normal
-	// face z-		   		   
-	AddBlockInfoToMap(128, 2, 104, 5, 0); // state:outter
-	AddBlockInfoToMap(128, 2, 104, 8, 1); // state:outter
-	AddBlockInfoToMap(128, 2, 104, 18, 2);// state:inner
-	AddBlockInfoToMap(128, 2, 104, 21, 3);// state:inner
-	AddBlockInfoToMap(128, 2, 104, 4, 7); // state:normal
-	// face z-		  		   
-	AddBlockInfoToMap(128, 3, 104, 6, 0); // state:outter
-	AddBlockInfoToMap(128, 3, 104, 7, 1); // state:outter
-	AddBlockInfoToMap(128, 3, 104, 19, 2);// state:inner
-	AddBlockInfoToMap(128, 3, 104, 20, 3);// state:inner
-	AddBlockInfoToMap(128, 3, 104, 3, 7); // state:normal
+	AddStairBlockInfoToMap(128, 104);
 
 	// emerald_ore
 	AddBlockInfoToMap(129, 0, 2, 0);
@@ -863,82 +780,13 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(133, 0, 156, 0);
 
 	// spruce_stairs
-	// face x-
-	AddBlockInfoToMap(134, 0, 117, 5, 0); // state:outter 
-	AddBlockInfoToMap(134, 0, 117, 8, 1); // state:outter 
-	AddBlockInfoToMap(134, 0, 117, 18, 2);// state:inner
-	AddBlockInfoToMap(134, 0, 117, 21, 3);// state:inner
-	AddBlockInfoToMap(134, 0, 117, 1, 7); // state:normal
-	// face x+		     	   
-	AddBlockInfoToMap(134, 1, 117, 6, 0); // state:outter
-	AddBlockInfoToMap(134, 1, 117, 7, 1); // state:outter
-	AddBlockInfoToMap(134, 1, 117, 19, 2);// state:inner
-	AddBlockInfoToMap(134, 1, 117, 20, 3);// state:inner
-	AddBlockInfoToMap(134, 1, 117, 2, 7); // state:normal
-	// face z-		      	   
-	AddBlockInfoToMap(134, 2, 117, 5, 0); // state:outter
-	AddBlockInfoToMap(134, 2, 117, 8, 1); // state:outter
-	AddBlockInfoToMap(134, 2, 117, 18, 2);// state:inner
-	AddBlockInfoToMap(134, 2, 117, 21, 3);// state:inner
-	AddBlockInfoToMap(134, 2, 117, 4, 7); // state:normal
-	// face z-		  		   
-	AddBlockInfoToMap(134, 3, 117, 6, 0); // state:outter
-	AddBlockInfoToMap(134, 3, 117, 7, 1); // state:outter
-	AddBlockInfoToMap(134, 3, 117, 19, 2);// state:inner
-	AddBlockInfoToMap(134, 3, 117, 20, 3);// state:inner
-	AddBlockInfoToMap(134, 3, 117, 3, 7); // state:normal
+	AddStairBlockInfoToMap(134, 117);
 
 	// birch_stairs
-	// face x-
-	AddBlockInfoToMap(135, 0, 172, 5, 0); // state:outter 
-	AddBlockInfoToMap(135, 0, 172, 8, 1); // state:outter 
-	AddBlockInfoToMap(135, 0, 172, 18, 2);// state:inner
-	AddBlockInfoToMap(135, 0, 172, 21, 3);// state:inner
-	AddBlockInfoToMap(135, 0, 172, 1, 7); // state:normal
-	// face x+		   	   	   
-	AddBlockInfoToMap(135, 1, 172, 6, 0); // state:outter
-	AddBlockInfoToMap(135, 1, 172, 7, 1); // state:outter
-	AddBlockInfoToMap(135, 1, 172, 19, 2);// state:inner
-	AddBlockInfoToMap(135, 1, 172, 20, 3);// state:inner
-	AddBlockInfoToMap(135, 1, 172, 2, 7); // state:normal
-	// face z-		   	   	   
-	AddBlockInfoToMap(135, 2, 172, 5, 0); // state:outter
-	AddBlockInfoToMap(135, 2, 172, 8, 1); // state:outter
-	AddBlockInfoToMap(135, 2, 172, 18, 2);// state:inner
-	AddBlockInfoToMap(135, 2, 172, 21, 3);// state:inner
-	AddBlockInfoToMap(135, 2, 172, 4, 7); // state:normal
-	// face z-		  		   
-	AddBlockInfoToMap(135, 3, 172, 6, 0); // state:outter
-	AddBlockInfoToMap(135, 3, 172, 7, 1); // state:outter
-	AddBlockInfoToMap(135, 3, 172, 19, 2);// state:inner
-	AddBlockInfoToMap(135, 3, 172, 20, 3);// state:inner
-	AddBlockInfoToMap(135, 3, 172, 3, 7); // state:normal
+	AddStairBlockInfoToMap(135, 172);
 
 	// jungle_stairs
-	// face x-
-	AddBlockInfoToMap(136, 0, 188, 5, 0); // state:outter 
-	AddBlockInfoToMap(136, 0, 188, 8, 1); // state:outter 
-	AddBlockInfoToMap(136, 0, 188, 18, 2);// state:inner
-	AddBlockInfoToMap(136, 0, 188, 21, 3);// state:inner
-	AddBlockInfoToMap(136, 0, 188, 1, 7); // state:normal
-	// face x+		   		   
-	AddBlockInfoToMap(136, 1, 188, 6, 0); // state:outter
-	AddBlockInfoToMap(136, 1, 188, 7, 1); // state:outter
-	AddBlockInfoToMap(136, 1, 188, 19, 2);// state:inner
-	AddBlockInfoToMap(136, 1, 188, 20, 3);// state:inner
-	AddBlockInfoToMap(136, 1, 188, 2, 7); // state:normal
-	// face z-		   	   	   
-	AddBlockInfoToMap(136, 2, 188, 5, 0); // state:outter
-	AddBlockInfoToMap(136, 2, 188, 8, 1); // state:outter
-	AddBlockInfoToMap(136, 2, 188, 18, 2);// state:inner
-	AddBlockInfoToMap(136, 2, 188, 21, 3);// state:inner
-	AddBlockInfoToMap(136, 2, 188, 4, 7); // state:normal
-	// face z-		  		   
-	AddBlockInfoToMap(136, 3, 188, 6, 0); // state:outter
-	AddBlockInfoToMap(136, 3, 188, 7, 1); // state:outter
-	AddBlockInfoToMap(136, 3, 188, 19, 2);// state:inner
-	AddBlockInfoToMap(136, 3, 188, 20, 3);// state:inner
-	AddBlockInfoToMap(136, 3, 188, 3, 7); // state:normal
+	AddStairBlockInfoToMap(136, 188);
 
 	// command_block
 	AddBlockInfoToMap(137, 0, 212, 0);
@@ -1013,7 +861,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(155, 0, 97, 0);
 
 	// quartz_stairs
-	AddBlockInfoToMap(156, 0, 187, 0);
+	AddStairBlockInfoToMap(156, 187);
 
 	// face x-
 	AddBlockInfoToMap(156, 0, 187, 5, 0); // state:outter 
@@ -1347,56 +1195,10 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(162, 0, 140, 0);
 
 	// acacia_stairs
-	// face x-
-	AddBlockInfoToMap(163, 0, 172, 5, 0); // state:outter 
-	AddBlockInfoToMap(163, 0, 172, 8, 1); // state:outter 
-	AddBlockInfoToMap(163, 0, 172, 18, 2);// state:inner
-	AddBlockInfoToMap(163, 0, 172, 21, 3);// state:inner
-	AddBlockInfoToMap(163, 0, 172, 1, 7); // state:normal
-	// face x+		    	   
-	AddBlockInfoToMap(163, 1, 172, 6, 0); // state:outter
-	AddBlockInfoToMap(163, 1, 172, 7, 1); // state:outter
-	AddBlockInfoToMap(163, 1, 172, 19, 2);// state:inner
-	AddBlockInfoToMap(163, 1, 172, 20, 3);// state:inner
-	AddBlockInfoToMap(163, 1, 172, 2, 7); // state:normal
-	// face z-		     	   
-	AddBlockInfoToMap(163, 2, 172, 5, 0); // state:outter
-	AddBlockInfoToMap(163, 2, 172, 8, 1); // state:outter
-	AddBlockInfoToMap(163, 2, 172, 18, 2);// state:inner
-	AddBlockInfoToMap(163, 2, 172, 21, 3);// state:inner
-	AddBlockInfoToMap(163, 2, 172, 4, 7); // state:normal
-	// face z-		  		   
-	AddBlockInfoToMap(163, 3, 172, 6, 0); // state:outter
-	AddBlockInfoToMap(163, 3, 172, 7, 1); // state:outter
-	AddBlockInfoToMap(163, 3, 172, 19, 2);// state:inner
-	AddBlockInfoToMap(163, 3, 172, 20, 3);// state:inner
-	AddBlockInfoToMap(163, 3, 172, 3, 7); // state:normal
+	AddStairBlockInfoToMap(163, 172);
 
 	// dark_oak_stairs
-	// face x-
-	AddBlockInfoToMap(164, 0, 188, 5, 0); // state:outter 
-	AddBlockInfoToMap(164, 0, 188, 8, 1); // state:outter 
-	AddBlockInfoToMap(164, 0, 188, 18, 2);// state:inner
-	AddBlockInfoToMap(164, 0, 188, 21, 3);// state:inner
-	AddBlockInfoToMap(164, 0, 188, 1, 7); // state:normal
-	// face x+		   	   
-	AddBlockInfoToMap(164, 1, 188, 6, 0); // state:outter
-	AddBlockInfoToMap(164, 1, 188, 7, 1); // state:outter
-	AddBlockInfoToMap(164, 1, 188, 19, 2);// state:inner
-	AddBlockInfoToMap(164, 1, 188, 20, 3);// state:inner
-	AddBlockInfoToMap(164, 1, 188, 2, 7); // state:normal
-	// face z-		    	   
-	AddBlockInfoToMap(164, 2, 188, 5, 0); // state:outter
-	AddBlockInfoToMap(164, 2, 188, 8, 1); // state:outter
-	AddBlockInfoToMap(164, 2, 188, 18, 2);// state:inner
-	AddBlockInfoToMap(164, 2, 188, 21, 3);// state:inner
-	AddBlockInfoToMap(164, 2, 188, 4, 7); // state:normal
-	// face z-		  		   
-	AddBlockInfoToMap(164, 3, 188, 6, 0); // state:outter
-	AddBlockInfoToMap(164, 3, 188, 7, 1); // state:outter
-	AddBlockInfoToMap(164, 3, 188, 19, 2);// state:inner
-	AddBlockInfoToMap(164, 3, 188, 20, 3);// state:inner
-	AddBlockInfoToMap(164, 3, 188, 3, 7); // state:normal
+	AddStairBlockInfoToMap(164, 188);
 
 	// slime (can not find the replace block in paracraft)
 	//AddBlockInfoToMap(165, 0, 117, 0);
@@ -1468,30 +1270,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(179, 2, 12, 0);
 
 	// red_sandstone_stairs 
-	// face x-
-	AddBlockInfoToMap(180, 0, 188, 5, 0); // state:outter 
-	AddBlockInfoToMap(180, 0, 188, 8, 1); // state:outter 
-	AddBlockInfoToMap(180, 0, 188, 18, 2);// state:inner
-	AddBlockInfoToMap(180, 0, 188, 21, 3);// state:inner
-	AddBlockInfoToMap(180, 0, 188, 1, 7); // state:normal
-	// face x+		   
-	AddBlockInfoToMap(180, 1, 188, 6, 0); // state:outter
-	AddBlockInfoToMap(180, 1, 188, 7, 1); // state:outter
-	AddBlockInfoToMap(180, 1, 188, 19, 2);// state:inner
-	AddBlockInfoToMap(180, 1, 188, 20, 3);// state:inner
-	AddBlockInfoToMap(180, 1, 188, 2, 7); // state:normal
-	// face z-		     
-	AddBlockInfoToMap(180, 2, 188, 5, 0); // state:outter
-	AddBlockInfoToMap(180, 2, 188, 8, 1); // state:outter
-	AddBlockInfoToMap(180, 2, 188, 18, 2);// state:inner
-	AddBlockInfoToMap(180, 2, 188, 21, 3);// state:inner
-	AddBlockInfoToMap(180, 2, 188, 4, 7); // state:normal
-	// face z-		  	   
-	AddBlockInfoToMap(180, 3, 188, 6, 0); // state:outter
-	AddBlockInfoToMap(180, 3, 188, 7, 1); // state:outter
-	AddBlockInfoToMap(180, 3, 188, 19, 2);// state:inner
-	AddBlockInfoToMap(180, 3, 188, 20, 3);// state:inner
-	AddBlockInfoToMap(180, 3, 188, 3, 7); // state:normal
+	AddStairBlockInfoToMap(180, 188);
 
 	// double_stone_slab2
 	AddBlockInfoToMap(181, 0, 23, 0);
@@ -1699,6 +1478,15 @@ bool MCBlock::IsSolidBlock( int block_id )
 		return (block_maps[block_id] == 1);
 	else
 		return true;
+}
+
+bool MCBlock::IsStairBlock(uint16_t block_id)
+{
+	if (block_id == 53 || block_id == 67 || block_id == 108 || block_id == 109 || block_id == 114 || block_id == 128 || 
+		block_id == 134 || block_id == 135 || block_id == 136 || block_id == 156 || block_id == 163 || block_id == 164 || block_id == 180)
+		return true;
+	else
+		return false;
 }
 
 bool MCBlock::TranslateMCBlock(uint16_t &block_id, uint16_t &block_data, uint16_t block_state, uint16_t& block_side)

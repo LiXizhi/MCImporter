@@ -144,6 +144,28 @@ bool WorldCache::hasBlock(BlockPos blockpos, uint16_t block_id, uint8_t data, ui
 	return false;
 }
 
+bool WorldCache::GetBlockInfo(BlockPos blockpos, uint16_t &block_id, uint8_t &data, uint8_t &state)
+{
+	ChunkPos chunkpos(blockpos);
+	RegionPos &regionpos = chunkpos.getRegion();
+	if (world.hasRegion(regionpos))
+	{
+		RegionFile* region = getRegion(regionpos);
+		if (region)
+		{
+			if (region->hasChunk(chunkpos))
+			{
+				Chunk* chunk = getChunk(chunkpos);
+				if (chunk)
+				{
+					return chunk->GetBlockInfo(blockpos.toLocalPos(), block_id, data, state);
+				}
+			}
+		}
+	}
+	return false;
+}
+
 uint16_t WorldCache::getBlockID(BlockPos& blockpos){
 	ChunkPos chunkpos(blockpos);
 	RegionPos &regionpos = chunkpos.getRegion();

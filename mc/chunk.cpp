@@ -213,18 +213,22 @@ bool Chunk::hasBlock(const LocalBlockPos& pos, const uint16_t block_id, const ui
 {
 	bool hasBlock = true;
 	uint16_t real_block_id = getBlockID(pos);
-	if (block_id == 0 && real_block_id > 0)
-	{
+	if (real_block_id == 0)
+		return false;
+
+	if (block_id == 0)
 		return true;
-	}
+
 	if (real_block_id != block_id)
-		hasBlock = false;
-	if (data != 255)
-	{
-		uint16_t real_data = getBlockData(pos);
-		if (real_data != data)
-			hasBlock = false;
-	}
+		return false;
+
+	if (data == 255)
+		return true;
+
+	uint16_t real_data = getBlockData(pos);
+	if (real_data != data)
+		return false;
+
 	/*if (state != 255)
 	{
 		uint16_t real_state = getBlockState(pos);
@@ -233,6 +237,17 @@ bool Chunk::hasBlock(const LocalBlockPos& pos, const uint16_t block_id, const ui
 	}*/
 	return hasBlock;
 }
+
+bool Chunk::GetBlockInfo(LocalBlockPos pos, uint16_t &block_id, uint8_t &data, uint8_t &state)
+{
+	uint16_t real_block_id = getBlockID(pos);
+	if (real_block_id == 0)
+		return false;
+	block_id = real_block_id;
+	data = getBlockData(pos);
+	return true;
+}
+
 //
 ///*
 //53(oak_stairs),67(stone_stairs),108(brick_stairs),109(stone_brick_stairs),114(nether_brick_stairs),128(sandstone_stairs),134(spruce_stairs),135(birch_stairs),

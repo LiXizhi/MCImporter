@@ -72,7 +72,10 @@ public:
 
 	bool Chunk::hasSolidBlock(const LocalBlockPos& pos) const;
 	// if data or state value is 255,don't need check it;
-	bool hasBlock(const LocalBlockPos& pos, const uint16_t block_id, const uint8_t data = 255, const uint8_t state = 255) const;
+	bool hasBlock(const LocalBlockPos& pos, const uint16_t block_id = 0, const uint8_t data = 255, const uint8_t state = 255) const;
+
+	bool GetBlockInfo(LocalBlockPos pos, uint16_t &block_id, uint8_t &data, uint8_t &state);
+
 	/*uint8_t getBlockState(const LocalBlockPos& pos) const;
 	uint8_t getStairsBlockState(const LocalBlockPos& pos,uint16_t block_id) const;*/
 
