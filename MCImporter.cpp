@@ -920,6 +920,26 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 				pState->WriteLog("\n");
 			}
 		}
+		else if (sCmd == "GetSpawnPosition")
+		{
+			int nSpawnPosX=0, nSpawnPosY=0, nSpawnPosZ = 0;
+			const std::string& sCallback = tabMsg["callback"];
+			NPLInterface::NPLObjectProxy msg;
+			msg["cmd"] = sCmd;
+			if (GetSpawnPosition(nSpawnPosX, nSpawnPosY, nSpawnPosZ))
+			{
+				msg["x"] = (double)nSpawnPosX;
+				msg["y"] = (double)nSpawnPosY;
+				msg["z"] = (double)nSpawnPosZ;
+			}
+			else
+			{
+				msg["success"] = false;
+			}
+			std::string output;
+			NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
+			pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
+		}
 		else if (sCmd == "GetChunkBlocks")
 		{
 			std::vector<int> blocks;
@@ -927,9 +947,12 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 			int chunkX = (int)((double)tabMsg["x"]);
 			int chunkZ = (int)((double)tabMsg["z"]);
 			const std::string& sCallback = tabMsg["callback"];
+			NPLInterface::NPLObjectProxy msg;
+			msg["chunk_x"] = (double)chunkX;
+			msg["chunk_z"] = (double)chunkZ;
+			msg["cmd"] = sCmd;
 			if (GetChunkBlocks(chunkX, chunkZ, &blocks))
 			{
-				NPLInterface::NPLObjectProxy msg;
 				int32_t blockCount = 0;
 				NPLInterface::NPLObjectProxy xTable, yTable, zTable, templateTable, dataTable;
 				for (vector<int>::iterator iter = blocks.begin(); iter != blocks.end(); iter++)
@@ -941,32 +964,16 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 					templateTable[blockCount] = (double)(*iter++);
 					dataTable[blockCount] = (double)(*iter++);
 				}
-				msg["chunk_x"] = (double)chunkX;
-				msg["chunk_z"] = (double)chunkZ;
 				msg["x"] = xTable;
 				msg["y"] = yTable;
 				msg["z"] = zTable;
 				msg["tempId"] = templateTable;
 				msg["data"] = dataTable;
 				msg["count"] = (double)blockCount;
-				
-				std::string output;
-				NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
-				pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
-
-				//pState->WriteLog("some blocks are loaded in the chunk\n");
-				//pState->WriteLog(output.c_str());
 			}
-			else
-			{
-				NPLInterface::NPLObjectProxy msg;
-				msg["chunk_x"] = (double)chunkX;
-				msg["chunk_z"] = (double)chunkZ;
-
-				std::string output;
-				NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
-				pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
-			}
+			std::string output;
+			NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
+			pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
 		}
 	}
 }

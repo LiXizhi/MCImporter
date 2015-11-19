@@ -24,3 +24,43 @@ Date: 2015.11
 		stream.read(&payload[0], length);
 	}
 	VC compiler does not support 0 length array.  gcc has it. 
+
+---++ change log
+
+2015.11.18  by Lipeng
+
+c++
+
+1.open folder browser select mc world path
+
+(1).EditorHelper.h         add function static bool OpenFolderDialog(string& FolderPath, string title);
+
+(2).ParaScriptingScene.h   add function static bool InitMCWorldInfo(string mcWorldPath = "");
+
+(3).ParaScripting.cpp add  def("InitMCWorldInfo", &ParaScene::InitMCWorldInfo),
+
+2.read mc world spawn position
+
+(1).MCImporterDLL add function  CORE_EXPORT_DECL bool GetSpawnPosition(int &spawnX, int &spawnY, int &spawnZ);
+
+(2).BlockWorld.h add function  bool GetMCWorldSpawnPos(const luabind::adl::object& pos);
+
+(3).ParaScriptingTerrain.h  add function  static bool GetMCWorldSpawnPosition(const luabind::adl::object& pos);
+
+(4).ParaScripting3.cpp add def("GetMCWorldSpawnPosition", &ParaTerrain::GetMCWorldSpawnPosition),
+
+script
+
+1.open folder browser select mc world path
+
+(1).InternetLoadWorld.lua  add   function InternetLoadWorld.LoadMCWorld()
+
+(2).CreateNewWorld.lua   add   function CreateNewWorld.LoadMCWorld(worldname)
+
+(3).script/apps/Aries/Creator/Game/main.lua  in "function Game.Start()" add  GameLogic.SetMCWorld(ParaWorld.BeMCWorld());
+
+(4).game_logic.lua  add   GameLogic.SetMCWorld(beMCWorld)
+
+2.set paracraft spawn position according the mc world spawn position
+
+(1).script/apps/Aries/Creator/Game/World/World.lua  in  function World:GetSpawnPoint() use "ParaTerrain.GetMCWorldSpawnPosition" get the mc world spawn position
