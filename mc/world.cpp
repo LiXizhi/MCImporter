@@ -45,6 +45,7 @@ World::~World() {
  */
 bool World::load(const std::string& dir, int rotation) {
 	worldpath = dir;
+
 	this->rotation = rotation;
 	fs::path world_dir(dir);
 	fs::path region_dir = world_dir / "region";
