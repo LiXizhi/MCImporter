@@ -966,18 +966,13 @@ CORE_EXPORT_DECL void LibActivate(int nType, void* pVoid)
 		else if (sCmd == "loadmcworld")
 		{
 			const std::string& sPath = tabMsg["path"];
-			if (LoadMCWorld(sPath))
-			{
-				pState->WriteLog("successfully loaded mc world:");
-				pState->WriteLog(sPath.c_str());
-				pState->WriteLog("\n");
-			}
-			else
-			{
-				pState->WriteLog("error: failed to load mc world:");
-				pState->WriteLog(sPath.c_str());
-				pState->WriteLog("\n");
-			}
+			const std::string& sCallback = tabMsg["callback"];
+			NPLInterface::NPLObjectProxy msg;
+			msg["cmd"] = sCmd;
+			msg["succeed"] = LoadMCWorld(sPath);
+			std::string output;
+			NPLInterface::NPLHelper::NPLTableToString("msg", msg, output);
+			pState->call(sCallback.c_str(), output.c_str(), (int)output.size());
 		}
 		else if (sCmd == "GetSpawnPosition")
 		{
