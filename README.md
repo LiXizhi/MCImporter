@@ -7,6 +7,6 @@
 ![image](https://cloud.githubusercontent.com/assets/94537/20385844/0a467790-acf4-11e6-8c44-ad29d8226ce4.png)
 
 
-> 支持Minecraft v1.7. v1.8的世界暂时不支持。 
+> Minecraft v1.7. v1.8的世界测试过
 
 > minecraft file parser is from https://github.com/mapcrafter/mapcrafter
