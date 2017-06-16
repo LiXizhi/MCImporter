@@ -901,6 +901,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(155, 0, 97, 0);
 	AddBlockInfoToMap(155, 1, 97, 0);
 	AddBlockInfoToMap(155, 2, 97, 0);
+	AddBlockInfoToMap(155, 4, 97, 0);
 
 	// quartz_stairs
 	AddStairBlockInfoToMap(156, 187);
