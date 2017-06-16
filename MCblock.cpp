@@ -203,7 +203,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(22, 0, 131, 0);
 
 	// dispenser (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(23, 0, 0, 0);
+	AddBlockInfoToMap(23, 0, 155, 0);
 
 	// lapis_block 
 	AddBlockInfoToMap(24, 0, 4, 0);
@@ -214,7 +214,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(25, 0, 216, 0);
 
 	// bed (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(26, 0, 0, 0);
+	AddBlockInfoToMap(26, 0, 0, 0);
 
 	// golden_rail
 	AddBlockInfoToMap(27, 0, 250, 2); //flat and around z 
@@ -292,7 +292,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(35, 15, 71, 0);
 
 	// piston_extension (can find this block in version 1.8.8 mc,replace it with 34<piston_head>) 
-	//AddBlockInfoToMap(36, 0, 0, 0);
+	AddBlockInfoToMap(36, 0, 0, 0);
 
 	// yellow_flower
 	AddBlockInfoToMap(37, 0, 116, 0);
@@ -321,13 +321,20 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(42, 0, 143, 0);
 
 	// double_stone_slab (can find this block in version 1.8.8 mc)
-	//AddBlockInfoToMap(43, 0, 0, 0);
+	AddBlockInfoToMap(43, 0, 59, 0);
+	AddBlockInfoToMap(43, 1, 51, 0);
+	AddBlockInfoToMap(43, 2, 138, 0);
+	AddBlockInfoToMap(43, 3, 155, 0);
+	AddBlockInfoToMap(43, 4, 70, 0);
+	AddBlockInfoToMap(43, 5, 68, 0);
+	AddBlockInfoToMap(43, 6, 154, 0);
+	AddBlockInfoToMap(43, 7, 97, 0);
 
 	// stone_slab
 	AddBlockInfoToMap(44, 0, 176, 0);
 	AddBlockInfoToMap(44, 1, 177, 0);
 	// 44/2 block doesn't exist
-	//AddBlockInfoToMap(44, 2, 178, 0);
+	AddBlockInfoToMap(44, 2, 184, 0);
 	AddBlockInfoToMap(44, 3, 178, 0);
 	AddBlockInfoToMap(44, 4, 179, 0);
 	AddBlockInfoToMap(44, 5, 180, 0);
@@ -360,7 +367,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(51, 0, 0, 0);
 
 	// mob_spawner (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(52, 0, 0, 0);
+	AddBlockInfoToMap(52, 0, 155, 0);
 
 	// oak_stairs
 	AddStairBlockInfoToMap(53, 112);
@@ -376,7 +383,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(54, 5, 215, 0, 0, 1);
 
 	// redstone_wire (can find this block in version 1.8.8 mc)
-	//AddBlockInfoToMap(55, 0, 189, 0);
+	AddBlockInfoToMap(55, 0, 189, 0);
 
 	// diamond_ore
 	AddBlockInfoToMap(56, 0, 147, 0);
@@ -385,7 +392,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(57, 0, 148, 0);
 
 	// crafting_table (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(58, 0, 176, 0);
+	AddBlockInfoToMap(58, 0, 128, 0);
 
 	// wheat
 	AddBlockInfoToMap(59, 0, 164, 3);
@@ -402,17 +409,17 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(60, 7, 13, 0); //moist
 
 	// furnace (can not find the replace block in paracraft)
-	//// face z-
-	//AddBlockInfoToMap(61, 2, 0, 0);
-	//// face z+			   
-	//AddBlockInfoToMap(61, 3, 0, 0);
-	//// face x-			   
-	//AddBlockInfoToMap(61, 4, 0, 0);
-	//// face x+			   
-	//AddBlockInfoToMap(61, 5, 0, 0);
+	// face z-
+	AddBlockInfoToMap(61, 2, 155, 0);
+	// face z+			   
+	AddBlockInfoToMap(61, 3, 155, 0);
+	// face x-			   
+	AddBlockInfoToMap(61, 4, 155, 0);
+	// face x+			   
+	AddBlockInfoToMap(61, 5, 155, 0);
 
 	// lit_furnace (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(62, 0, 176, 0);
+	AddBlockInfoToMap(62, 0, 155, 0);
 
 	// standing_sign ()
 	AddBlockInfoToMap(63, 0, 211, 2);   // south 
@@ -483,7 +490,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(70, 1, 200, 1);
 
 	// iron_door
-	AddBlockInfoToMap(71, 0, 0, 0);
+	AddBlockInfoToMap(71, 0, 230, 0);
 
 	// wooden_pressure_plate
 	AddBlockInfoToMap(72, 0, 201, 0);
@@ -536,7 +543,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(80, 0, 161, 0);
 
 	// cactus (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(81, 0, 176, 0);
+	AddBlockInfoToMap(81, 0, 152, 0);
 
 	// clay
 	AddBlockInfoToMap(82, 0, 53, 0);
@@ -545,7 +552,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(83, 0, 161, 0);
 
 	// jukebox (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(84, 0, 176, 0);
+	AddBlockInfoToMap(84, 0, 217, 0);
 
 	// fence
 	AddBlockInfoToMap(85, 0, 101, 1, 0);
@@ -578,7 +585,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(89, 0, 87, 0);
 
 	// portal (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(90, 0, 176, 0);
+	AddBlockInfoToMap(90, 0, 146, 0);
 
 	// lit_pumpkin
 	AddBlockInfoToMap(91, 0, 220, 0);
@@ -618,7 +625,12 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(96, 11, 108, 0);
 
 	// monster_egg (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(97, 0, 176, 0);
+	AddBlockInfoToMap(97, 0, 58, 0);
+	AddBlockInfoToMap(97, 1, 58, 0);
+	AddBlockInfoToMap(97, 2, 68, 0);
+	AddBlockInfoToMap(97, 3, 69, 0);
+	AddBlockInfoToMap(97, 4, 66, 0);
+	AddBlockInfoToMap(97, 5, 66, 0);
 
 	// stonebrick
 	AddBlockInfoToMap(98, 0, 68, 0);
@@ -672,19 +684,19 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(103, 0, 152, 0);
 
 	// pumpkin_stem (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(104, 0, 117, 0);
+	AddBlockInfoToMap(104, 0, 117, 0);
 
 	// melon_stem (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(105, 0, 117, 0);
+	AddBlockInfoToMap(105, 0, 117, 0);
 
 	// vine
-	AddBlockInfoToMap(106, 1, 117, 5); //facing:z-
-	AddBlockInfoToMap(106, 2, 117, 3); //facing:x+
-	AddBlockInfoToMap(106, 4, 117, 1); //facing:z+
-	AddBlockInfoToMap(106, 8, 117, 4); //facing:x-
+	AddBlockInfoToMap(106, 1, 162, 5); //facing:z-
+	AddBlockInfoToMap(106, 2, 162, 3); //facing:x+
+	AddBlockInfoToMap(106, 4, 162, 1); //facing:z+
+	AddBlockInfoToMap(106, 8, 162, 4); //facing:x-
 
 	// fence_gate (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(107, 0, 117, 0);
+	AddBlockInfoToMap(107, 0, 108, 0);
 
 	// brick_stairs
 	AddStairBlockInfoToMap(108, 167);
@@ -693,7 +705,7 @@ void MCBlock::InitTranslateMap()
 	AddStairBlockInfoToMap(109, 168);
 
 	// mycelium (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(110, 0, 117, 0);
+	AddBlockInfoToMap(110, 0, 153, 0);
 
 	// waterlily
 	AddBlockInfoToMap(111, 0, 222, 0);
@@ -723,28 +735,28 @@ void MCBlock::InitTranslateMap()
 	AddStairBlockInfoToMap(114, 169);
 
 	// nether_wart (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(115, 0, 117, 0);
+	AddBlockInfoToMap(115, 0, 154, 0);
 
 	// enchanting_table (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(116, 0, 117, 0);
+	AddBlockInfoToMap(116, 0, 131, 0);
 
 	// brewing_stand (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(117, 0, 117, 0);
+	AddBlockInfoToMap(117, 0, 131, 0);
 
 	// cauldron (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(118, 0, 117, 0);
+	AddBlockInfoToMap(118, 0, 124, 0);
 
 	// end_portal (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(119, 0, 117, 0);
+	AddBlockInfoToMap(119, 0, 0, 0);
 
 	// end_portal_frame (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(120, 0, 117, 0);
+	AddBlockInfoToMap(120, 0, 146, 0);
 
 	// end_stone
 	AddBlockInfoToMap(121, 0, 155, 0);
 
 	// dragon_egg (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(122, 0, 117, 0);
+	AddBlockInfoToMap(122, 0, 0, 0);
 
 	// redstone_lamp
 	AddBlockInfoToMap(123, 0, 6, 0);
@@ -754,12 +766,22 @@ void MCBlock::InitTranslateMap()
 
 	// double_wooden_slab
 	AddBlockInfoToMap(125, 0, 81, 0);
+	AddBlockInfoToMap(125, 1, 138, 0);
+	AddBlockInfoToMap(125, 2, 139, 0);
+	AddBlockInfoToMap(125, 3, 140, 0);
+	AddBlockInfoToMap(125, 4, 81, 0);
+	AddBlockInfoToMap(125, 5, 70, 0);
 
 	// wooden_slab
 	AddBlockInfoToMap(126, 0, 160, 0);
+	AddBlockInfoToMap(126, 1, 183, 0);
+	AddBlockInfoToMap(126, 2, 184, 0);
+	AddBlockInfoToMap(126, 3, 185, 0);
+	AddBlockInfoToMap(126, 4, 160, 0);
+	AddBlockInfoToMap(126, 5, 179, 0);
 
 	// cocoa (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(127, 0, 117, 0);
+	AddBlockInfoToMap(127, 0, 149, 0);
 
 	// sandstone_stairs
 	AddStairBlockInfoToMap(128, 104);
@@ -768,13 +790,20 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(129, 0, 2, 0);
 
 	// ender_chest (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(130, 0, 117, 0);
+	// face z-
+	AddBlockInfoToMap(130, 2, 215, 0, 0, 2);
+	// face z+
+	AddBlockInfoToMap(130, 3, 215, 0, 0, 3);
+	// face x-
+	AddBlockInfoToMap(130, 4, 215, 0, 0, 0);
+	// face x+
+	AddBlockInfoToMap(130, 5, 215, 0, 0, 1);
 
 	// tripwire_hook (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(131, 0, 117, 0);
+	AddBlockInfoToMap(131, 0, 0, 0);
 
 	// tripwire (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(132, 0, 117, 0);
+	AddBlockInfoToMap(132, 0, 0, 0);
 
 	// emerald_block
 	AddBlockInfoToMap(133, 0, 156, 0);
@@ -792,7 +821,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(137, 0, 212, 0);
 
 	// beacon (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(138, 0, 117, 0);
+	AddBlockInfoToMap(138, 0, 148, 0);
 
 	// cobblestone_wall
 	AddBlockInfoToMap(139, 0, 111, 1, 0);
@@ -813,40 +842,51 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(139, 0, 111, 18, 15);
 
 	// flower_pot (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(140, 0, 117, 0);
+	AddBlockInfoToMap(140, 0, 98, 0);
 
 	// carrots (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(141, 0, 117, 0);
+	AddBlockInfoToMap(141, 0, 113, 0);
 
 	// potatoes (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(142, 0, 117, 0);
+	AddBlockInfoToMap(142, 0, 113, 0);
 
 	// wooden_button 
 	AddBlockInfoToMap(143, 0, 117, 0);
 
 	// skull (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(144, 0, 117, 0);
+	AddBlockInfoToMap(144, 0, 123, 0);
 
 	// anvil (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(145, 0, 117, 0);
+	AddBlockInfoToMap(145, 0, 124, 0);
+	AddBlockInfoToMap(145, 1, 124, 0);
+	AddBlockInfoToMap(145, 2, 124, 0);
 
 	// trapped_chest (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(146, 0, 117, 0);
+	// face z-
+	AddBlockInfoToMap(146, 2, 215, 0, 0, 2);
+	// face z+
+	AddBlockInfoToMap(146, 3, 215, 0, 0, 3);
+	// face x-
+	AddBlockInfoToMap(146, 4, 215, 0, 0, 0);
+	// face x+
+	AddBlockInfoToMap(146, 5, 215, 0, 0, 1);
 
 	// light_weighted_pressure_plate (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(147, 0, 117, 0);
+	AddBlockInfoToMap(147, 0, 201, 0);
+	AddBlockInfoToMap(147, 1, 201, 1);
 
 	// heavy_weighted_pressure_plate (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(148, 0, 117, 0);
+	AddBlockInfoToMap(148, 0, 200, 0);
+	AddBlockInfoToMap(148, 1, 200, 1);
 
 	// unpowered_comparator (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(149, 0, 117, 0);
+	AddBlockInfoToMap(149, 0, 0, 0);
 
 	// powered_comparator (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(150, 0, 117, 0);
+	AddBlockInfoToMap(150, 0, 0, 0);
 
 	// daylight_detector (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(151, 0, 117, 0);
+	AddBlockInfoToMap(151, 0, 74, 0);
 
 	// redstone_block
 	AddBlockInfoToMap(152, 0, 157, 0);
@@ -855,10 +895,12 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(153, 0, 158, 0);
 
 	// hopper (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(154, 0, 117, 0);
+	AddBlockInfoToMap(154, 0, 155, 0);
 
 	// quartz_block
 	AddBlockInfoToMap(155, 0, 97, 0);
+	AddBlockInfoToMap(155, 1, 97, 0);
+	AddBlockInfoToMap(155, 2, 97, 0);
 
 	// quartz_stairs
 	AddStairBlockInfoToMap(156, 187);
@@ -889,30 +931,35 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(156, 3, 187, 3, 7); // state:normal
 
 	// activator_rail (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(157, 0, 117, 0);
+	AddBlockInfoToMap(157, 0, 250, 2); //flat and around z 
+	AddBlockInfoToMap(157, 1, 250, 1); //flat and around x  
+	AddBlockInfoToMap(157, 2, 250, 7);//from low to high and around x
+	AddBlockInfoToMap(157, 3, 250, 9);//from high to low and around x
+	AddBlockInfoToMap(157, 4, 250, 10);//from high to low and around z
+	AddBlockInfoToMap(157, 5, 250, 8);//from low to high and around z
 
 	// dropper (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(158, 0, 117, 0);
+	AddBlockInfoToMap(158, 0, 155, 0);
 
 	// stained_hardened_clay (can not find the replace block in paracraft)
-	/*
-	AddBlockInfoToMap(159, 0, 117, 0);
-	AddBlockInfoToMap(159, 1, 117, 0);
-	AddBlockInfoToMap(159, 2, 117, 0);
-	AddBlockInfoToMap(159, 3, 117, 0);
-	AddBlockInfoToMap(159, 4, 117, 0);
-	AddBlockInfoToMap(159, 5, 117, 0);
-	AddBlockInfoToMap(159, 6, 117, 0);
-	AddBlockInfoToMap(159, 7, 117, 0);
-	AddBlockInfoToMap(159, 8, 117, 0);
-	AddBlockInfoToMap(159, 9, 117, 0);
-	AddBlockInfoToMap(159, 10, 117, 0);
-	AddBlockInfoToMap(159, 11, 117, 0);
-	AddBlockInfoToMap(159, 12, 117, 0);
-	AddBlockInfoToMap(159, 13, 117, 0);
-	AddBlockInfoToMap(159, 14, 117, 0);
-	AddBlockInfoToMap(159, 15, 117, 0);
-	*/
+	
+	AddBlockInfoToMap(159, 0, 133, 0);
+	AddBlockInfoToMap(159, 1, 94, 0);
+	AddBlockInfoToMap(159, 2, 25, 0);
+	AddBlockInfoToMap(159, 3, 21, 0);
+	AddBlockInfoToMap(159, 4, 27, 0);
+	AddBlockInfoToMap(159, 5, 20, 0);
+	AddBlockInfoToMap(159, 6, 96, 0);
+	AddBlockInfoToMap(159, 7, 134, 0);
+	AddBlockInfoToMap(159, 8, 134, 0);
+	AddBlockInfoToMap(159, 9, 20, 0);
+	AddBlockInfoToMap(159, 10, 24, 0);
+	AddBlockInfoToMap(159, 11, 19, 0);
+	AddBlockInfoToMap(159, 12, 136, 0);
+	AddBlockInfoToMap(159, 13, 137, 0);
+	AddBlockInfoToMap(159, 14, 23, 0);
+	AddBlockInfoToMap(159, 15, 71, 0);
+	
 
 	// stained_glass_pan
 	//data:0-15, have 16 color glass plane
@@ -1190,9 +1237,11 @@ void MCBlock::InitTranslateMap()
 
 	// leaves2
 	AddBlockInfoToMap(161, 0, 129, 0);
+	AddBlockInfoToMap(161, 1, 129, 0);
 
 	// log2
 	AddBlockInfoToMap(162, 0, 140, 0);
+	AddBlockInfoToMap(162, 1, 140, 0);
 
 	// acacia_stairs
 	AddStairBlockInfoToMap(163, 172);
@@ -1201,10 +1250,10 @@ void MCBlock::InitTranslateMap()
 	AddStairBlockInfoToMap(164, 188);
 
 	// slime (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(165, 0, 117, 0);
+	AddBlockInfoToMap(165, 0, 145, 0);
 
 	// barrier (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(166, 0, 117, 0);
+	AddBlockInfoToMap(166, 0, 0, 0);
 
 	// iron_trapdoor
 	AddBlockInfoToMap(167, 0, 117, 0);
@@ -1218,7 +1267,7 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(169, 0, 6, 0);
 
 	// hay_block (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(170, 0, 117, 0);
+	AddBlockInfoToMap(170, 0, 186, 0);
 
 	// carpet
 	AddBlockInfoToMap(171, 0, 234, 0);
@@ -1256,13 +1305,13 @@ void MCBlock::InitTranslateMap()
 	AddBlockInfoToMap(175, 5, 115, 0);
 
 	// standing_banner (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(176, 0, 117, 0);
+	AddBlockInfoToMap(176, 0, 0, 0);
 
 	// wall_banner (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(177, 0, 117, 0);
+	AddBlockInfoToMap(177, 0, 0, 0);
 
 	// daylight_detector_inverted (can not find the replace block in paracraft)
-	//AddBlockInfoToMap(178, 0, 117, 0);
+	AddBlockInfoToMap(178, 0, 74, 0);
 
 	// red_sandstone
 	AddBlockInfoToMap(179, 0, 12, 0);
