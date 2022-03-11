@@ -1,4 +1,10 @@
 # MCImporter
+
+## 安装
+1. 下载文件: https://github.com/LiXizhi/MCImporter/releases/download/v1.0/MCImporterV1.1.zip 并copy到./Mod目录下
+2. 打开paracraft MOD管理器， 启动插件，重启paracraft.
+
+## 使用方法
 可以将minecraft世界导入到paracraft中。
 - 加载插件
 - 进入任意世界, 进入ESC菜单，点击`世界::import minecraft world...`，并选择MC世界的路径
